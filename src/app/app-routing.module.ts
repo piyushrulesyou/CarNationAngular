@@ -5,8 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
-    { path: 'signin', component: SigninComponent },
-    { path: 'signup', component: SignupComponent },
+    // { path: 'signin', component: SigninComponent },
+    // { path: 'signup', component: SignupComponent },
     { path: 'home', component: HomeComponent }
 ]
 

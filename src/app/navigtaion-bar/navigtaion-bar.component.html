@@ -8,6 +8,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" routerLink="/user">
+                        User
+                    </a></li>
                 <li class="nav-item active"><a class="nav-link" routerLink="">
                         Car Subscription
                     </a></li>
@@ -18,10 +21,10 @@
                         FAQs
                     </a></li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signinModal">
-                        Login or Signup
-                    </button>
                     <app-signin></app-signin>
+                </li>
+                <li class="nav-item">
+                    <app-signup></app-signup>
                 </li>
             </ul>
         </div>

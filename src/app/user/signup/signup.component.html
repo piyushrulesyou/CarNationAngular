@@ -1,0 +1,50 @@
+<p-dialog id="signinModal" [(visible)]="displaySignup" modal="true" [style]="{width: '50vw'}" [closeOnEscape]="true"
+    [dismissableMask]="true" [draggable]="false" #signupModal>
+    <p-header>
+        SignUp
+    </p-header>
+    <form (ngSubmit)="onSubmitSignup(signupForm)" #signupForm=ngForm>
+        <div class="row">
+            <div class="col-sm-5 form-group">
+                <label for="email">EMail</label>
+                <input type="text" id="email" class="form-control" (ngModel)="email" name="email" #email="ngModel"
+                    required email>
+            </div>
+
+            <div class="col-sm-5 form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" (ngModel)="username" name="username"
+                    #username="ngModel" required>
+            </div>
+
+            <div class="col-sm-5 form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" (ngModel)="password" name="password"
+                    #password="ngModel" required>
+            </div>
+        </div>
+        <button class="btn btn-success button-lg float-right" type="submit"
+            [disabled]="signupForm.invalid">Signup</button>
+    </form>
+</p-dialog>
+
+<button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Signup</button>
+
+<p-dialog id="signinModal" [(visible)]="displayOtp" modal="true" [style]="{width: '50vw'}" [closeOnEscape]="true"
+    [dismissableMask]="true" [draggable]="false" #otpModal>
+    <p-header>
+        OTP
+    </p-header>
+    <form (ngSubmit)="onSubmitOtp(otpForm)" #otpForm=ngForm>
+        <div class="row">
+            <div class="col-sm-5 form-group">
+                <label for="otp">OTP</label>
+                <input type="text" id="otp" class="form-control" (ngModel)="otp" name="otp" #otp="ngModel" required>
+            </div>
+        </div>
+        <button pButton type="button" class="ui-button-rounded ui-button-secondary" (click)="resendOTP()">Resend
+            OTP</button>
+        <button class="btn btn-success button-lg float-right" type="submit" [disabled]="otpForm.invalid">Validate
+            OTP</button>
+    </form>
+</p-dialog>

@@ -1,19 +1,26 @@
-<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">SignIn</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<p-dialog id="signinModal" [(visible)]="display" modal="true" [style]="{width: '50vw'}" [closeOnEscape]="true"
+    [dismissableMask]="true" [draggable]="false">
+    <p-header>
+        SignIn
+    </p-header>
+    <form (ngSubmit)="onSubmit(signinForm)" #signinForm=ngForm>
+        <div class="row">
+            <div class="col-sm-5 form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username"
+                    #uname="ngModel" required>
             </div>
-            <div class="modal-body">
-                <p>UserName</p>
-                <p>Password</p>
-            </div>
-            <div class="modal-footer">
-                <p>SignIn</p>
+
+            <div class="col-sm-5 form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password"
+                    #amount="ngModel" required>
             </div>
         </div>
-    </div>
-</div>
+        <hr>
+        <button class="btn btn-success button-lg float-right" type="submit"
+            [disabled]="signinForm.invalid">Signin</button>
+    </form>
+</p-dialog>
+
+<button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Signin</button>

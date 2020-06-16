@@ -2,6 +2,8 @@
     [dismissableMask]="true" [draggable]="false">
     <p-header>
         SignIn
+        <br>
+        <span *ngIf="errMsg!=null">{{errMsg}}</span>
     </p-header>
     <form (ngSubmit)="onSubmit(signinForm)" #signinForm=ngForm>
         <div class="row">

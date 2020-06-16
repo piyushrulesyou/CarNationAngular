@@ -1,4 +1,5 @@
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
+
 export interface AwsAuthData {
     Username: string,
     Password: string

@@ -1,0 +1,7 @@
+<h2>List of all vehicles!!</h2>
+
+<button class="btn btn-danger" (click)=getInventory()>GET</button>
+
+<h4 *ngFor="let each of vehicleList">
+    <p>{{each.producer.producerName + " " + each.model.modelCode + " " + each.variant.variantName}}</p>
+</h4>

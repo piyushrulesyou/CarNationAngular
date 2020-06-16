@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SigninComponent } from '../signin/signin.component';
 import { NgForm } from '@angular/forms';
-import { CognitoUserService } from '../cognito-user.service';
+import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
   otpResponse: string;
   signinResponse: string;
 
-  constructor(private cognitoUserService: CognitoUserService) { }
+  constructor(private cognitoUserService: CognitoUserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,12 +33,11 @@ export class SignupComponent implements OnInit {
 
   onSubmitSignup(signupForm: NgForm) {
     this.username = signupForm.value.username;
+    this.password = signupForm.value.password;
 
     this.cognitoUserService.signup(signupForm.value.email, signupForm.value.username, signupForm.value.password).subscribe(
       data => {
         this.signupResponse = "Success";
-        console.log(this.signupResponse + "Enter OTP!");
-        console.log(data);
         this.afterSignup();
       },
       err => {
@@ -59,8 +59,6 @@ export class SignupComponent implements OnInit {
 
     this.cognitoUserService.validateOTP(this.username, otpForm.value.otp).subscribe(
       data => {
-        console.log("User verified successfully!!");
-        console.log(data);
         this.otpResponse = "Successfully registered and verified user!"
         this.displayOtp = false;
         this.afterOtp();
@@ -72,8 +70,8 @@ export class SignupComponent implements OnInit {
     )
   }
   afterOtp() {
-    //code to auto signin
-    console.log(this.otpResponse);
+    //code to auto signin the user only after successful signup
+    this.cognitoUserService.signin(this.username, this.password).subscribe();
   }
   resendOTP() {
     this.cognitoUserService.resendOTP(this.username);

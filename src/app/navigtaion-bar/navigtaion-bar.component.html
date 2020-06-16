@@ -11,7 +11,7 @@
                 <li class="nav-item active"><a class="nav-link" routerLink="/user">
                         User
                     </a></li>
-                <li class="nav-item active"><a class="nav-link" routerLink="">
+                <li class="nav-item active"><a class="nav-link" routerLink="/vehicle">
                         Car Subscription
                     </a></li>
                 <li class="nav-item active"><a class="nav-link" routerLink="">
@@ -20,11 +20,14 @@
                 <li class="nav-item active"><a class="nav-link" routerLink="">
                         FAQs
                     </a></li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!cognitoUserService.isLoggedIn()">
                     <app-signin></app-signin>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!cognitoUserService.isLoggedIn()">
                     <app-signup></app-signup>
+                </li>
+                <li class="nav-item" *ngIf="cognitoUserService.isLoggedIn()">
+                    <button class="btn btn-primary" type="button" (click)="logout()">Logout</button>
                 </li>
             </ul>
         </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CognitoUserService } from '../core/cognito-service/cognito-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigtaion-bar',
@@ -9,9 +11,13 @@ export class NavigtaionBarComponent implements OnInit {
 
   collapsed: boolean = false;
 
-  constructor() { }
+  constructor(public cognitoUserService: CognitoUserService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  logout() {
+    this.cognitoUserService.logout();
+    this.router.navigate(['/home']);
   }
 
 }

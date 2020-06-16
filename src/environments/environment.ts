@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   region: 'ap-south-1',
   userPoolId: 'ap-south-1_OeY8LHGsz',
-  clientId: '2gt58uiktcdku5d24fg67m53ln'
+  clientId: '2gt58uiktcdku5d24fg67m53ln',
+  baseURL: ' https://kka6cqubal.execute-api.ap-south-1.amazonaws.com/dev/'
 };
 
 /*

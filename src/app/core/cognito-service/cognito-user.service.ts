@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool, CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { AwsAuthData, CognitoLoginResponse } from '../models/AwsServiceModel';
 
 @Injectable({
@@ -27,6 +27,11 @@ export class CognitoUserService {
     return new CognitoUserPool(CognitoUserService.USER_POOL);
   }
 
+  getCurrentUser() {
+    // uses the localstorage to fetch details of the current user and can only work after signin.
+    return this.getUserPool().getCurrentUser();
+  }
+
   getAccessToken() {
     return localStorage.getItem(CognitoUserService.ACCESS_TOKEN_KEY);
   }
@@ -37,6 +42,28 @@ export class CognitoUserService {
 
   getRefreshToken() {
     return localStorage.getItem(CognitoUserService.REFRESH_TOKEN_KEY);
+  }
+
+  isLoggedIn() {
+    return this.getUserPool().getCurrentUser();
+  }
+
+  getSessionDetails() {
+    const idToken = localStorage.getItem(CognitoUserService.ID_TOKEN_KEY);
+    try {
+      return JSON.parse(atob(idToken.split('.')[1]))
+    } catch{
+      return null;
+    }
+
+  }
+
+  isTokenExpired() {
+    const user = this.getSessionDetails();
+    const expiryTime = user.exp;
+    if (expiryTime < new Date().getTime() / 1000)
+      return true;
+    return false;
   }
 
   signup(email: string, username: string, password: string) {
@@ -52,12 +79,9 @@ export class CognitoUserService {
     return Observable.create(observer => {
       userPool.signUp(username, password, attributeList, null, function (err, res) {
         if (err) {
-          console.log("Signup failed!!!");
           observer.error(err);
 
         } else {
-          console.log("User is registered!!");
-          console.log(JSON.stringify(res));
           observer.next(res);
         }
         observer.complete();
@@ -75,11 +99,8 @@ export class CognitoUserService {
     return Observable.create(observer => {
       cognitoUser.confirmRegistration(otp, true, function (err, res) {
         if (err) {
-          console.log("OTP Verification failed!!");
           observer.error(err);
         } else {
-          console.log("OTP is verified!!");
-          console.log(res);
           observer.next(res);
         }
         observer.complete();
@@ -156,7 +177,10 @@ export class CognitoUserService {
   }
 
   logout() {
-
+    var user = this.getCurrentUser();
+    if (user)
+      user.signOut();
+    localStorage.clear();
   }
 
   forgotPassword() {

@@ -10,3 +10,8 @@ export interface CognitoLoginResponse {
     message: string,
     data: CognitoUserSession
 }
+
+export interface IAwsUserData {
+    username: string;
+    email: string;
+}

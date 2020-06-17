@@ -190,7 +190,7 @@ export class CognitoUserService {
     localStorage.setItem(CognitoUserService.ID_TOKEN_KEY, user.getIdToken().getJwtToken());
     localStorage.setItem(CognitoUserService.REFRESH_TOKEN_KEY, user.getRefreshToken().getToken());
     console.log("55");
-    console.log(localStorage.getItem('CognitoUserService.ID_TOKEN_KEY'));
+    console.log(localStorage.getItem(CognitoUserService.ID_TOKEN_KEY));
 
   }
 

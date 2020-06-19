@@ -17,7 +17,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
   private static APP_ID_HEADER = 'app-id';
   private static APP_ID_HEADER_VALUE = '1';
 
-  constructor(private cognitoUserService: CognitoUserService, private router: Router) { }
+  constructor(private cognitoUserService: CognitoUserService) { }
   fullURL: string;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

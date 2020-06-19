@@ -3,6 +3,7 @@ import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPo
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AwsAuthData, CognitoLoginResponse, IAwsUserData } from '../models/AwsServiceModel';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -199,17 +200,17 @@ export class CognitoUserService {
       Pool: this.getUserPool()
     }
     const cognitoUser = new CognitoUser(userData);
-    return new Observable(observer => {
+    new Observable(observer => {
       cognitoUser.refreshSession(token, (err, res) => {
         if (!err) {
           this.handleLogin(res);
-          // return of(1);
         } else {
+          console.log("Error occured inside refresh token service");
           this.logout();
-          // return of(null);
         }
       })
-    })
+    }).subscribe();
+    return of(null).pipe(delay(4000));
   }
 
   logout() {

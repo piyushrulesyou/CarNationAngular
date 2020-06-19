@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CognitoUserService } from '../cognito-service/cognito-user.service';
-import { tap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class RefreshTokenInterceptor implements HttpInterceptor {
@@ -17,9 +17,11 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     if (this.cognitoUserService.isTokenExpired()) {
-      this.cognitoUserService.refreshToken().subscribe(() => {
-        return next.handle(request);
-      })
+      return this.cognitoUserService.refreshToken().pipe(
+        switchMap(() => {
+          return next.handle(request);
+        })
+      )
     } else {
       return next.handle(request);
     }

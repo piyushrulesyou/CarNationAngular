@@ -15,6 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ErrorComponent } from './error/error.component';
 import { CoreModule } from './core/core.module';
 import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
+import { LoadingSpinnerComponent } from './core/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.compo
     HomeComponent,
     NavigtaionBarComponent,
     ErrorComponent,
-    VehicleListingComponent
+    VehicleListingComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

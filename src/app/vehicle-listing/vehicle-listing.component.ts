@@ -17,16 +17,20 @@ export class VehicleListingComponent implements OnInit {
 
   vehicle: VehicleResponse;
   vehicleList: any[];
+  isLoading: boolean = false;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   getInventory() {
+    this.isLoading = true;
     this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle').subscribe(
       response => {
         this.vehicle = response;
         this.vehicleList = this.vehicle.data;
+        this.isLoading = false;
         console.log(this.vehicle);
       });
   }

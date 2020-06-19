@@ -21,6 +21,7 @@ export class CognitoUserService {
   public static REFRESH_TOKEN_KEY = 'refresh_token';
   public static ID_TOKEN_KEY = 'id_token';
   public authData: AwsAuthData;
+  public autoRefreshTokenTimer;
 
   constructor() { }
 
@@ -190,6 +191,7 @@ export class CognitoUserService {
     localStorage.setItem(CognitoUserService.ACCESS_TOKEN_KEY, user.getAccessToken().getJwtToken());
     localStorage.setItem(CognitoUserService.ID_TOKEN_KEY, user.getIdToken().getJwtToken());
     localStorage.setItem(CognitoUserService.REFRESH_TOKEN_KEY, user.getRefreshToken().getToken());
+    this.autoRefreshToken(environment.tokenRefreshTime);
   }
 
   refreshToken(): Observable<void> {
@@ -218,6 +220,16 @@ export class CognitoUserService {
     if (user)
       user.signOut();
     localStorage.clear();
+    if (this.autoRefreshTokenTimer) {
+      clearTimeout(this.autoRefreshTokenTimer);
+    }
+    this.autoRefreshTokenTimer = null;
+  }
+
+  autoRefreshToken(refreshTime: number) {
+    this.autoRefreshTokenTimer = setTimeout(() => {
+      this.refreshToken().subscribe();
+    }, refreshTime * 1000)
   }
 
   forgotPassword() {

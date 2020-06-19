@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool, CognitoUserSession } from 'amazon-cognito-identity-js';
-import { Observable } from 'rxjs';
+import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool, CognitoUserSession, CognitoRefreshToken } from 'amazon-cognito-identity-js';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AwsAuthData, CognitoLoginResponse } from '../models/AwsServiceModel';
+import { AwsAuthData, CognitoLoginResponse, IAwsUserData } from '../models/AwsServiceModel';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +56,21 @@ export class CognitoUserService {
       return null;
     }
 
+  }
+
+  /**
+   * Uses the ID token to get the user details stored in the payload part of the id token.
+   */
+  getUserDetails(): IAwsUserData {
+    const id_token = this.getSessionDetails();
+    if (id_token) {
+      const user: IAwsUserData = {
+        username: id_token['cognito:username'],
+        email: id_token['email']
+      }
+      return user;
+    }
+    return null;
   }
 
   isTokenExpired() {
@@ -174,6 +189,27 @@ export class CognitoUserService {
     localStorage.setItem(CognitoUserService.ACCESS_TOKEN_KEY, user.getAccessToken().getJwtToken());
     localStorage.setItem(CognitoUserService.ID_TOKEN_KEY, user.getIdToken().getJwtToken());
     localStorage.setItem(CognitoUserService.REFRESH_TOKEN_KEY, user.getRefreshToken().getToken());
+  }
+
+  refreshToken(): Observable<void> {
+    const refreshToken = this.getRefreshToken();
+    const token = new CognitoRefreshToken({ RefreshToken: refreshToken });
+    const userData = {
+      Username: this.getUserDetails().username,
+      Pool: this.getUserPool()
+    }
+    const cognitoUser = new CognitoUser(userData);
+    return new Observable(observer => {
+      cognitoUser.refreshSession(token, (err, res) => {
+        if (!err) {
+          this.handleLogin(res);
+          // return of(1);
+        } else {
+          this.logout();
+          // return of(null);
+        }
+      })
+    })
   }
 
   logout() {

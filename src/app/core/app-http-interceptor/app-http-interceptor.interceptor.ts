@@ -4,7 +4,6 @@ import { environment } from '../../../environments/environment';
 import { CognitoUserService } from '../cognito-service/cognito-user.service';
 
 import { map, catchError, tap } from 'rxjs/operators'
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable()

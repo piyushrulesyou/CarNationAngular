@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './app-http-interceptor/app-http-interceptor.interceptor';
 import { RefreshTokenInterceptor } from './refresh-token-interceptor/refresh-token-interceptor.interceptor';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { SharedModule } from '../shared/shared-module';
 @NgModule({
     declarations: [
-        // LoadingSpinnerComponent
+    ],
+    imports: [
+        SharedModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },

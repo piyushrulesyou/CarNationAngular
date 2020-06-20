@@ -1,0 +1,12 @@
+<p-carousel [value]="carImages" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true"
+    [autoplayInterval]="3000">
+    <ng-template let-vehicle pTemplate="item">
+        <div class="car-details">
+            <div class="p-grid p-nogutter">
+                <div class="p-col-12">
+                    <img width="100%" height="100%" alt="image" src="assets/img/login_cars/{{vehicle.image}}" />
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>

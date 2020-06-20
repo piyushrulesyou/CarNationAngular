@@ -15,8 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ErrorComponent } from './error/error.component';
 import { CoreModule } from './core/core.module';
 import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
-import { LoadingSpinnerComponent } from './core/loading-spinner/loading-spinner.component';
-import { SampleLoginComponent } from './user/sample-login/sample-login.component';
+import { SharedModule } from './shared/shared-module';
 
 @NgModule({
   declarations: [
@@ -27,9 +26,7 @@ import { SampleLoginComponent } from './user/sample-login/sample-login.component
     HomeComponent,
     NavigtaionBarComponent,
     ErrorComponent,
-    VehicleListingComponent,
-    LoadingSpinnerComponent,
-    SampleLoginComponent
+    VehicleListingComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +35,8 @@ import { SampleLoginComponent } from './user/sample-login/sample-login.component
     HttpClientModule,
     AppRouting,
     DialogModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

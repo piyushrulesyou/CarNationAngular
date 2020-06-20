@@ -16,6 +16,7 @@ import { ErrorComponent } from './error/error.component';
 import { CoreModule } from './core/core.module';
 import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
 import { LoadingSpinnerComponent } from './core/loading-spinner/loading-spinner.component';
+import { SampleLoginComponent } from './user/sample-login/sample-login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoadingSpinnerComponent } from './core/loading-spinner/loading-spinner.
     NavigtaionBarComponent,
     ErrorComponent,
     VehicleListingComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    SampleLoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
 import { CognitoLoginResponse } from '../../core/models/AwsServiceModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signin',

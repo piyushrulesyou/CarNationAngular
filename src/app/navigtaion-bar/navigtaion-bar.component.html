@@ -1,46 +1,46 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a routerLink="/home" class="navbar-brand"><img class="img-responsive" src="assets/img/CarNationLogo.png"
-                style="width: 115px;"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active" *ngIf="cognitoUserService.isLoggedIn()"><a class="nav-link"
-                        routerLink="/vehicle">
-                        Car Subscription
-                    </a></li>
-                <li class="nav-item active"><a class="nav-link" routerLink="">
-                        How it works!
-                    </a></li>
-                <li class="nav-item active"><a class="nav-link" routerLink="">
-                        FAQs
-                    </a></li>
-                <li class="nav-item active" *ngIf="!cognitoUserService.isLoggedIn()"><a class="nav-link"
-                        routerLink="/login">
-                        Login
-                    </a></li>
-                <li *ngIf="cognitoUserService.isLoggedIn()">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" id="dropdownButton">
-                            Manage Menu
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownButton">
-                            <a class="dropdown-item" routerLink="/user">
-                                <i class="pi pi-bars"></i>
-                                &nbsp;My Profile
-                            </a>
-                            <a class="dropdown-item" (click)="logout()" routerLink="">
-                                <span><i class="pi pi-sign-out"></i></span>
-                                &nbsp;Logout
-                            </a>
-                        </div>
+    <!-- <div class="container-fluid"> -->
+    <a routerLink="/home" class="navbar-brand"><img class="img-responsive" src="assets/img/CarNationLogo.png"
+            style="width: 115px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active" *ngIf="cognitoUserService.isLoggedIn()"><a class="nav-link"
+                    routerLink="/vehicle">
+                    Car Subscription
+                </a></li>
+            <li class="nav-item active"><a class="nav-link" routerLink="">
+                    How it works!
+                </a></li>
+            <li class="nav-item active"><a class="nav-link" routerLink="">
+                    FAQs
+                </a></li>
+            <li class="nav-item active" *ngIf="!cognitoUserService.isLoggedIn()"><a class="nav-link"
+                    routerLink="/login">
+                    Login
+                </a></li>
+            <li *ngIf="cognitoUserService.isLoggedIn()">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" id="dropdownButton">
+                        Manage Menu
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownButton">
+                        <a class="dropdown-item" routerLink="/user">
+                            <i class="pi pi-bars"></i>
+                            &nbsp;My Profile
+                        </a>
+                        <a class="dropdown-item" (click)="logout()" routerLink="">
+                            <span><i class="pi pi-sign-out"></i></span>
+                            &nbsp;Logout
+                        </a>
                     </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+        </ul>
     </div>
+    <!-- </div> -->
 </nav>

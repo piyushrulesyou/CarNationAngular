@@ -1,41 +1,50 @@
+<br><br>
 <div class="container-fluid">
     <div class="row login-box">
-        <div class="col-6">
+        <div class="col-md-6 col-xs-12 col-sm-12 ">
             <app-login-carousel></app-login-carousel>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-xs-12 col-sm-12 ">
             <div class="card text-center">
-                <img src="assets/img/CarNationLogo.png">
+                <!-- <img src="assets/img/CarNationLogo.png"> -->
+                <h5 class="card-title glow">CarNation</h5>
                 <div class="card-body">
-                    <form (ngSubmit)="onSubmit(signinForm)" #signinForm=ngForm autocomplete="off">
-                        <div class="row">
-                            <div class="p-grid ui-fluid">
-                                <div class="p-col-12 p-md-4">
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"
-                                                style="line-height: 1.25;"></i></span>
-                                        <input type="text" pInputText id="username" class="form-control"
-                                            [(ngModel)]="username" name="username" #uname="ngModel"
-                                            placeholder="Username" required>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            <form (ngSubmit)="onSubmit(signinForm)" #signinForm=ngForm autocomplete="off">
+                                <div class="row">
+                                    <div class="p-grid ui-fluid">
+                                        <div class="p-col-12 p-md-4">
+                                            <div class="ui-inputgroup">
+                                                <span class="ui-inputgroup-addon"><i class="pi pi-user"
+                                                        style="line-height: 1.25;"></i></span>
+                                                <input type="text" pInputText id="username" class="form-control"
+                                                    [(ngModel)]="username" name="username" #uname="ngModel"
+                                                    placeholder="Username" required>
+                                            </div>
 
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-lock"
-                                                style="line-height: 1.25;"></i></span>
-                                        <input type="password" pInputText id="password" class="form-control"
-                                            [(ngModel)]="password" name="password" #amount="ngModel"
-                                            placeholder="Password" required>
+                                            <div class="ui-inputgroup">
+                                                <span class="ui-inputgroup-addon"><i class="pi pi-lock"
+                                                        style="line-height: 1.25;"></i></span>
+                                                <input type="password" pInputText id="password" class="form-control"
+                                                    [(ngModel)]="password" name="password" #amount="ngModel"
+                                                    placeholder="Password" required>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <button class="btn btn-success button-lg" type="submit" [disabled]="signinForm.invalid">
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"
+                                        *ngIf="isLoading"></span>&nbsp;&nbsp;Signin</button>
+                                <hr>
+                                <span>New here! Signup instead
+                                    <a class="nav-link" routerLink="/signup">Signup</a>
+                                </span>
+                            </form>
                         </div>
-                        <button class="btn btn-success button-lg" type="submit"
-                            [disabled]="signinForm.invalid">Signin</button>
-                        <hr>
-                        <span>New here! Signup instead
-                            <a class="nav-link" routerLink="/signup">Signup</a>
-                        </span>
-                    </form>
+                        <div class="col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
                 </div>
             </div>
         </div>

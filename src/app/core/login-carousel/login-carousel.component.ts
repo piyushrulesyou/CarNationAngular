@@ -26,6 +26,12 @@ export class LoginCarouselComponent implements OnInit {
     },
     {
       image: 'car-5.jpg'
+    },
+    {
+      image: 'car-6.jpg'
+    },
+    {
+      image: 'car-7.jpg'
     }
   ];
 }

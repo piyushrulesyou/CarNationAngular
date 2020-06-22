@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-interface VehicleResponse {
-  error: any;
-  errors: any;
-  data: any[];
-}
+import { VehicleService } from './vehicle-service/vehicle-service.service';
+import { VehicleResponse } from './vehicle-models/VehicleModels';
 
 @Component({
   selector: 'app-vehicle-listing',
@@ -15,23 +11,22 @@ interface VehicleResponse {
 
 export class VehicleListingComponent implements OnInit {
 
+  isLoading: boolean = false;
+  totalCars: number;
   vehicle: VehicleResponse;
   vehicleList: any[];
-  isLoading: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
-  }
-
-  getInventory() {
     this.isLoading = true;
-    this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle').subscribe(
+    this.vehicleService.getAllVehicles().subscribe(
       response => {
         this.vehicle = response;
         this.vehicleList = this.vehicle.data;
-        this.isLoading = false;
         console.log(this.vehicle);
+        this.isLoading = false;
+        this.totalCars = this.vehicleList.length;
       });
   }
 }

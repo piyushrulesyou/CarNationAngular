@@ -15,6 +15,7 @@ export class SigninComponent implements OnInit {
   username: string;
   password: string;
   errMsg: string;
+  isLoading: boolean = false;
 
   constructor(private cognitoUserService: CognitoUserService, private router: Router, private activateRoute: ActivatedRoute) { }
   returnURL: string;
@@ -28,11 +29,8 @@ export class SigninComponent implements OnInit {
     )
   }
 
-  showDialog() {
-    this.display = true;
-  }
-
   onSubmit(signinForm: NgForm) {
+    this.isLoading = true;
     this.cognitoUserService.signin(signinForm.value.username, signinForm.value.password).subscribe(
       data => {
         this.afterLogin(data);
@@ -44,6 +42,7 @@ export class SigninComponent implements OnInit {
   }
 
   afterLogin(loginRes: CognitoLoginResponse) {
+    this.isLoading = false;
     if (loginRes.code === "INCORRECT_USERNAME_OR_PASSWORD") {
       this.errMsg = "Incorrect username or password.";
     } if (loginRes.code === "PASSWORD_CHANGE") {

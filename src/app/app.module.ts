@@ -16,6 +16,8 @@ import { ErrorComponent } from './error/error.component';
 import { CoreModule } from './core/core.module';
 import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
 import { SharedModule } from './shared/shared-module';
+import { SampleComponent } from './vehicle-listing/sample/sample.component';
+import { VehicleDetailsComponent } from './vehicle-listing/vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { SharedModule } from './shared/shared-module';
     HomeComponent,
     NavigtaionBarComponent,
     ErrorComponent,
-    VehicleListingComponent
+    VehicleListingComponent,
+    SampleComponent,
+    VehicleDetailsComponent
   ],
   imports: [
     BrowserModule,

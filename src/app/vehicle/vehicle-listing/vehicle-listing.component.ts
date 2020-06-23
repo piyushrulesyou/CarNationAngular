@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { VehicleService } from './vehicle-service/vehicle-service.service';
-import { VehicleResponse } from './vehicle-models/VehicleModels';
+import { VehicleResponse } from '../vehicle-models/VehicleModels';
+import { VehicleService } from '../vehicle-service/vehicle-service.service';
 
 @Component({
   selector: 'app-vehicle-listing',

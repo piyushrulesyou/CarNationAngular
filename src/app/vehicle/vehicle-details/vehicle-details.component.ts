@@ -11,10 +11,12 @@ export class VehicleDetailsComponent implements OnInit {
 
   vehicleId: string;
   vehicleDetails: any;
+  isLoading: boolean = false;
 
   constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.vehicleId = this.activatedRoute.snapshot.params['vehicleId'];
     this.activatedRoute.params.subscribe(
       params => {
@@ -24,6 +26,7 @@ export class VehicleDetailsComponent implements OnInit {
     this.vehicleService.getVehicleById(this.vehicleId).subscribe(
       response => {
         this.vehicleDetails = response.data;
+        this.isLoading = false;
       }
     );
   }

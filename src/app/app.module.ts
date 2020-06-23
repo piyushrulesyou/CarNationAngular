@@ -14,10 +14,7 @@ import { AppRouting } from './app-routing.module';
 import { DialogModule } from 'primeng/dialog';
 import { ErrorComponent } from './error/error.component';
 import { CoreModule } from './core/core.module';
-import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
 import { SharedModule } from './shared/shared-module';
-import { SampleComponent } from './vehicle-listing/sample/sample.component';
-import { VehicleDetailsComponent } from './vehicle-listing/vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +25,6 @@ import { VehicleDetailsComponent } from './vehicle-listing/vehicle-details/vehic
     HomeComponent,
     NavigtaionBarComponent,
     ErrorComponent,
-    VehicleListingComponent,
-    SampleComponent,
-    VehicleDetailsComponent
   ],
   imports: [
     BrowserModule,

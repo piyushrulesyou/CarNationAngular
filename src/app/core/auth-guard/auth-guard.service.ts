@@ -29,7 +29,7 @@ export class AuthGuardService implements CanActivate {
       }
       else {
         var returnURL = state.url;
-        return this.router.createUrlTree(['/login'], { queryParams: { 'returnURL': returnURL } });
+        return this.router.createUrlTree(['/user/login'], { queryParams: { 'returnURL': returnURL } });
       }
     }
   }

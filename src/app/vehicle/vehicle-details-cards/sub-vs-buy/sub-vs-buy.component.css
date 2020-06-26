@@ -1,0 +1,60 @@
+h4, h5 {
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.points {
+    border-bottom: 1px solid rgba(55, 59, 72, .1);
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+.each_point {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(27, 28, 36, .8);
+    padding-left: 0.8rem;
+}
+
+.icon {
+    text-align: center;
+}
+
+.icon_lg {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.last_sub {
+    border-bottom: 0px;
+}
+
+img.tick_cross {
+    height: 15px;
+    width: 20px;
+}
+
+div.tick_cross {
+    margin-left: 3rem;
+}
+
+.span_ico {
+    margin-left: 6.2rem;
+}
+
+a.more_diff {
+    border-radius: 0.1rem;
+    color: #1caba2;
+    font-weight: 700;
+    border: 2px solid #ebebeb;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    cursor: pointer;
+}
+
+div.more_diff {
+    margin-top: 2.5rem;
+}

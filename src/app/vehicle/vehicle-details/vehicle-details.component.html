@@ -1,30 +1,54 @@
 <div class="upper_border"></div>
-<div class="loading_spinner" *ngIf="isLoading">
-    <div class="spinner-grow text-primary" role="status">
-    </div>
-    <div class="spinner-grow text-secondary" role="status">
-    </div>
-    <div class="spinner-grow text-success" role="status">
-    </div>
-    <div class="spinner-grow text-danger" role="status">
-    </div>
-    <div class="spinner-grow text-warning" role="status">
-    </div>
-    <div class="spinner-grow text-info" role="status">
-    </div>
-    <div class="spinner-grow text-dark" role="status">
-    </div>
+<div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
 </div>
 <div class="row" *ngIf="!isLoading">
     <div class="col-lg-4 col-md-4 col-sm-12">
-        <!-- <img class="full_image" src="{{vehicleDetails.fullSizeImage}}"> -->
-        vehicleDetails.id
-        vehicleDetails.producer.producerName
-        vehicleDetails.model
+        <div class="row-lg-8 row-md-8 row-sm-12 row-xs-12">
+            <img class="full_image" src="{{vehicleDetails.fullSizeImage}}">
+        </div>
+        <div class="row-lg-4 row-md-4 row-sm-12 row-xs-12">
+            <span class="disclaimer">This image is for representational purpose only.</span>
+        </div>
     </div>
-    <div class="col-lg-8 col-md-8 col-sm-12">
-        vehicleDetails.id}}
-        vehicleDetails.producer.producerName}}
-        vehicleDetails.model}}
+    <div class="col-lg-1 col-md-1 col-sm-12">
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <span>
+                    <h4>{{vehicleDetails.producer.producerName}}&nbsp;{{vehicleDetails.model}}</h4>
+                </span>
+                <div class="attributes">
+                    <img class="icon"
+                        src="{{vehicleDetails.fuelType.fuelTypeImage}}">&nbsp;{{vehicleDetails.fuelType.fuelName}}&nbsp;&nbsp;
+
+                    <img class="icon"
+                        src="{{vehicleDetails.transmissionType.transmissionTypeImage}}">&nbsp;{{vehicleDetails.transmissionType.transmissionTypeName}}
+                </div>
+                <div class="row variant_color_condition">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <span class="variant_color_condition">Variant:&nbsp;</span>
+                        <span style="color: black;">{{vehicleDetails.variant}}</span>
+                        <br>
+                        <span class="variant_color_condition">Color:</span>
+                        <span *ngFor="let color of colors">
+                            <img class="color_images" src="{{color.colorImage}}" alt="{{color.colorCode}}"
+                                data-toggle="tooltip" data-placement="bottom" title="{{color.colorName}}">
+                        </span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <span class="variant_color_condition">Condition: </span>
+                        <br>
+                        <span style="color: black;">As good as new &nbsp;
+                            <i class="pi pi-check-circle" data-toggle="tooltip" data-placement="bottom"
+                                title="Verified"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-vehicle-listing-price></app-vehicle-listing-price>
+        <app-vehicle-cards [deliveryDate]="deliveryDate"></app-vehicle-cards>
     </div>
 </div>

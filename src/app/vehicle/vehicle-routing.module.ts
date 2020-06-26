@@ -12,7 +12,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
         children: [
             { path: '', component: VehicleListingComponent },
-            { path: 'vehicle-details/:id', component: VehicleDetailsComponent },
+            { path: 'vehicle-details/:vehicleId', component: VehicleDetailsComponent },
             { path: 'sample', component: SampleComponent }
         ]
     }

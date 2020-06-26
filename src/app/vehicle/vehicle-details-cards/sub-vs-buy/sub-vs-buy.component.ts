@@ -1,23 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleService } from '../vehicle-service/vehicle-service.service';
-import { ActivatedRoute } from '@angular/router';
-
-interface VehicleResponse {
-  error: any;
-  errors: any;
-  data: any[];
-}
 
 @Component({
-  selector: 'app-sample',
-  templateUrl: './sample.component.html',
-  styleUrls: ['./sample.component.css']
+  selector: 'app-sub-vs-buy',
+  templateUrl: './sub-vs-buy.component.html',
+  styleUrls: ['./sub-vs-buy.component.css']
 })
-export class SampleComponent implements OnInit {
+export class SubVsBuyComponent implements OnInit {
 
   constructor() { }
   diffArray: string[] = [];
   lastDiff: number;
+  isMore: boolean = true;
 
   ngOnInit(): void {
     this.prepareDiffArray();
@@ -28,6 +21,11 @@ export class SampleComponent implements OnInit {
     this.diffArray.push('No Long Term Commitment');
     this.diffArray.push('No Loan Process, NO CIBIL CHECK');
     this.diffArray.push('Doorstep Pick & Drop for Maintenance & Service');
+    this.lastDiff = this.diffArray.length - 1;
+  }
+
+  moreDiff() {
+    this.isMore = false;
     this.diffArray.push('Stress-free Car Maintenance');
     this.diffArray.push('Option to switch cars');
     this.diffArray.push('Hassle Free Insurance claims');

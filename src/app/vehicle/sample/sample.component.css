@@ -1,44 +1,35 @@
-.upper_border {
-    padding-bottom: 3rem;
+.points {
+    border-bottom: 0.01px solid gray;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
 }
 
-.total_cars {
-    color: gray;
-    padding-bottom: 1rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.each_point {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(27, 28, 36, .8);
+    padding-left: 0.8rem;
 }
 
-.price {
-    font-size: 2rem;
-    font-weight: bolder;
+.icon {
+    text-align: center;
 }
 
-.price_before {
-    font-size: 1.5rem;
-    color: gray;
-    text-decoration: line-through;
+.icon_lg {
+    /* text-align: center; */
+    margin-bottom: 2rem;
 }
 
-.month {
-    font-size: 1.25rem;
+.last_sub {
+    border-bottom: 0px;
 }
 
-img.icon {
-    height: 1rem;
-    width: 1rem;
+img.tick_cross {
+    height: 15px;
+    width: 20px;
 }
 
-img.car {
-    width: 12rem;
-    height: 5rem;
-}
-
-.rupee_symbol {
-    font-size: 1.5rem;
-    font-weight: bolder;
-}
-
-.attributes {
-    margin-top: 10px;
-    color: gray;
+div.tick_cross {
+    margin-left: 2rem;
+    margin-right: 1.1rem;
 }

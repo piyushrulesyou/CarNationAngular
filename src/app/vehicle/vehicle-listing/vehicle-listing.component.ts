@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { VehicleResponse } from '../vehicle-models/VehicleModels';
 import { VehicleService } from '../vehicle-service/vehicle-service.service';
+import { PriceUtil } from '../../utils/PriceUtil';
 
 @Component({
   selector: 'app-vehicle-listing',
@@ -15,6 +16,9 @@ export class VehicleListingComponent implements OnInit {
   totalCars: number;
   vehicle: VehicleResponse;
   vehicleList: any[];
+  basePriceArray: any[];
+  discountedPriceArray: any[]
+
 
   constructor(private vehicleService: VehicleService) { }
 
@@ -24,9 +28,9 @@ export class VehicleListingComponent implements OnInit {
       response => {
         this.vehicle = response;
         this.vehicleList = this.vehicle.data;
-        console.log(this.vehicle);
         this.isLoading = false;
         this.totalCars = this.vehicleList.length;
+        this.basePriceArray = PriceUtil.priceWithCommaArrayBasePrice(this.vehicleList);
       });
   }
 }

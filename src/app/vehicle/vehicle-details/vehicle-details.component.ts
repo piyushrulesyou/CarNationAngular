@@ -12,6 +12,8 @@ export class VehicleDetailsComponent implements OnInit {
   vehicleId: string;
   vehicleDetails: any;
   isLoading: boolean = false;
+  colors: any[];
+  deliveryDate: any = {};
 
   constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute) { }
 
@@ -26,9 +28,17 @@ export class VehicleDetailsComponent implements OnInit {
     this.vehicleService.getVehicleById(this.vehicleId).subscribe(
       response => {
         this.vehicleDetails = response.data;
+        this.colors = this.vehicleDetails.colorMaster;
         this.isLoading = false;
       }
     );
+    this.findDeliveryDate();
   }
-
+  findDeliveryDate() {
+    const today = new Date();
+    const newDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+    this.deliveryDate.date = newDate.getDate();
+    this.deliveryDate.month = newDate.toLocaleString('default', { month: 'long' });
+    this.deliveryDate.year = newDate.getFullYear();
+  }
 }

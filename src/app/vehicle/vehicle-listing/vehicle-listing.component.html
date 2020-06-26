@@ -1,34 +1,21 @@
 <div class="upper_border"></div>
-<div class="loading_spinner" *ngIf="isLoading">
-    <div class="spinner-grow text-primary" role="status">
-    </div>
-    <div class="spinner-grow text-secondary" role="status">
-    </div>
-    <div class="spinner-grow text-success" role="status">
-    </div>
-    <div class="spinner-grow text-danger" role="status">
-    </div>
-    <div class="spinner-grow text-warning" role="status">
-    </div>
-    <div class="spinner-grow text-info" role="status">
-    </div>
-    <div class="spinner-grow text-dark" role="status">
-    </div>
+<div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
 </div>
 <div class="row no-gutters" *ngIf="!isLoading">
     <div class="col-3">
     </div>
     <div class="col-9" style="width: 70rem;">
         <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in Delhi-NCR</h3>
-        <div *ngFor="let each of vehicleList">
-            <div class="card" style="width: 100%;">
+        <div *ngFor="let each of vehicleList; let i = index">
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-3">
                             <img class="car" src="{{each.smallSizeImage}}">
                         </div>
                         <div class="col-sm-6">
-                            <b>{{each.producer.producerName + " " + each.model}}</b>
+                            <b class="car_name">{{each.producer.producerName + " " + each.model}}</b>
                             <br>
                             <div class="attributes">
                                 <img class="icon"
@@ -43,13 +30,12 @@
                             <span class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute}}</span>
                             <span class="month">/month</span>
                             <br>
-                            <span class="price_before">₹{{each.priceMaster.basePrice}}</span>
+                            <span class="price_before">₹{{basePriceArray[i]}}</span>
                         </div>
                     </div>
-                    <a routerLink="vehicle-details/{{each.id}}" class="stretched-link"></a>
+                    <a routerLink="/vehicle/vehicle-details/{{each.id}}" class="stretched-link"></a>
                 </div>
             </div>
-            <br>
         </div>
     </div>
 </div>

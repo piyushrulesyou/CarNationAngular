@@ -1,0 +1,21 @@
+<div class="card shadow p-3 mb-5 bg-white rounded more-cards">
+    <div class="card-body">
+        <span>
+            <h5>Pricing Details</h5>
+        </span>
+        <div class="row price_card" *ngIf="tenureMaster && priceMaster && tenureArray">
+            <div *ngFor="let tenure of tenureArray; let i = index">
+                <div class="tenure_block" (click)="activeMonth(i)"
+                    [ngClass]="{'hightlighter':highlightMonth === true && index === i}">
+                    {{tenure.month}}&nbsp;Months
+                </div>
+            </div>
+            <div class="price" *ngIf="showPrice">
+                <span class="new_price">₹&nbsp;{{discountedPriceWithComma}}</span>
+                <span class="new_price_month">/month&nbsp;<span class="old_price">₹{{basePriceWithComma}}</span>
+                    <br>(Inclusive of Taxes)
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

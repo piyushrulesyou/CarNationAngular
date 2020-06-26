@@ -8,6 +8,11 @@
     margin-left: 8rem;
 }
 
+.loading_spinner {
+    margin-left: 30rem;
+    margin-top: 9rem;
+}
+
 .full_image {
     margin-left: 10px;
     width: 400px;

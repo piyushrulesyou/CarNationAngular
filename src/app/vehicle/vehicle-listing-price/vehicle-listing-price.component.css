@@ -1,0 +1,65 @@
+.card-body {
+    width: 40rem;
+    padding: initial;
+    padding-top: 0.5rem !important;
+    padding-left: 0.65rem !important;
+}
+
+h4, h5 {
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cards_common {
+    font-size: 1.1rem;
+}
+
+.tenure_block {
+    border-radius: 0.2rem;
+    border: 1px solid gray;
+    margin-right: 0.7rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    height: 2.5rem;
+    text-align: center;
+    color: gray;
+}
+
+div.more-cards {
+    margin-top: -1.5rem;
+}
+
+.hightlighter {
+    font-weight: bold;
+    background-color: #1fbab5 !important;
+    color: #fff !important;
+    border: 1px solid #1fbab5 !important;
+}
+
+.price {
+    margin-top: 0.8rem;
+}
+
+.price_card {
+    margin-top: 0.8rem;
+    margin-left: 0.3rem;
+}
+
+.new_price {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.new_price_month {
+    font-size: 1.25rem;
+    color: gray;
+}
+
+.old_price {
+    text-decoration: line-through;
+}

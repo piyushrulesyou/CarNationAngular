@@ -30,6 +30,22 @@ h4, h5 {
     color: gray;
 }
 
+.tenure_block_disabled {
+    border-radius: 0.2rem;
+    border: 1px solid gray;
+    margin-right: 0.7rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    height: 2.5rem;
+    text-align: center;
+    color: gray;
+    background-color: #cdcccf;
+}
+
 div.more-cards {
     margin-top: -1.5rem;
 }

@@ -5,10 +5,15 @@
         </span>
         <div class="row price_card" *ngIf="tenureMaster && priceMaster && tenureArray">
             <div *ngFor="let tenure of tenureArray; let i = index">
-                <div class="tenure_block" (click)="activeMonth(i)"
-                    [ngClass]="{'hightlighter':highlightMonth === true && index === i}">
+                <div *ngIf="tenure.price === 0; else priceNotZero" class="tenure_block_disabled">
                     {{tenure.month}}&nbsp;Months
                 </div>
+                <ng-template #priceNotZero>
+                    <div class="tenure_block" (click)="activeMonth(i)"
+                        [ngClass]="{'hightlighter':highlightMonth === true && index === i}">
+                        {{tenure.month}}&nbsp;Months
+                    </div>
+                </ng-template>
             </div>
             <div class="price" *ngIf="showPrice">
                 <span class="new_price">₹&nbsp;{{discountedPriceWithComma}}</span>

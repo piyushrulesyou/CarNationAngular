@@ -1,1 +1,4 @@
 <h5>City</h5>
+<p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder={{initialCity}} optionLabel="cityName"
+    (onChange)="onSelectCity()">
+</p-dropdown>

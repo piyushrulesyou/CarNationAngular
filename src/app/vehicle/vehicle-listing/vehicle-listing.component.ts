@@ -24,8 +24,15 @@ export class VehicleListingComponent implements OnInit {
   vehicleList: any[];
   basePriceArray: any[];
   discountedPriceArray: any[]
+  initialCitySelected: string = 'Agra';
 
   ngOnInit(): void {
+
+    this.vehicleService.initialCitySubject.subscribe(
+      city => {
+        this.initialCitySelected = city;
+      }
+    )
 
     if (!this.cognitoUserService.isLoggedIn()) {
       this.router.navigate(['/user/login']);

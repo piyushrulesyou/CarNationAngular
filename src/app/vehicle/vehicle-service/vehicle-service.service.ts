@@ -15,6 +15,7 @@ export class VehicleService {
   tenure: any;
   response: any[];
   vehicleInventory = new Subject<VehicleResponse>();
+  initialCitySubject = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
@@ -105,9 +106,30 @@ export class VehicleService {
     return this.http.get<CityResponse>('cities/get-cities');
   }
 
-  filterByBrandName(brand1: string, brand2?: string) {
-    console.log("**" + brand1);
-    if (brand2)
-      console.log("++" + brand2);
+  filterByBrandName(brand?: string[]) {
+    if (brand) {
+      let params = new HttpParams();
+      params = params.append('startPage', '0');
+      params = params.append('size', '10');
+      return this.http.post<VehicleResponse>('filters/brand', { brands: brand }, { params: params }).subscribe(
+        res => {
+          console.log(res);
+          this.vehicleInventory.next(res);
+        }
+      );
+    }
+  }
+
+  filterByCity(city: string) {
+    let params = new HttpParams();
+    params = params.append('city', city);
+    params = params.append('startPage', '0');
+    params = params.append('size', '10');
+    return this.http.get<VehicleResponse>('filters/city', { params: params }).subscribe(
+      res => {
+        console.log(res);
+        this.vehicleInventory.next(res);
+      }
+    );
   }
 }

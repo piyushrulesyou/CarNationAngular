@@ -13,3 +13,9 @@
 .price_max {
     margin-left: -30px;
 }
+
+.price_alert {
+    font-size: 0.6rem;
+    padding: 5px;
+    margin-left: 1rem;
+}

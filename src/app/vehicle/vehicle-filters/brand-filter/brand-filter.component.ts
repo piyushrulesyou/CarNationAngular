@@ -26,9 +26,6 @@ export class BrandFilterComponent implements OnInit {
   }
 
   onSelectBrand() {
-    const totalBrands = this.selectedBrands.length;
-    for (let i = 0; i < totalBrands; i++) {
-      this.vehicleService.filterByBrandName(this.selectedBrands[i]);
-    }
+    this.vehicleService.filterByBrandName(this.selectedBrands);
   }
 }

@@ -7,6 +7,9 @@
     </div>
 </div>
 <div class="row">
+    <span class="alert alert-danger price_alert" *ngIf="priceError">{{priceError}}</span>
+</div>
+<div class="row">
     <div class="col price_min">MIN</div>
     <div class="col price_max">MAX</div>
 </div>

@@ -25,6 +25,7 @@ export class PriceFilterComponent implements OnInit {
   minSelectedPrice: any = { name: '10,000', value: 10000 };
   maxSelectedPrice: any = { name: '40,000', value: 40000 };
   isSelected: boolean = false;
+  priceError: string;
 
   constructor(private vehicleService: VehicleService) { }
 
@@ -33,6 +34,7 @@ export class PriceFilterComponent implements OnInit {
 
   clearSelections() {
     this.isSelected = false;
+    this.priceError = "";
     this.minSelectedPrice = { name: '10,000', value: 10000 };
     this.maxSelectedPrice = { name: '40,000', value: 40000 };
     let minPrice = this.minSelectedPrice.value;
@@ -42,12 +44,13 @@ export class PriceFilterComponent implements OnInit {
 
   onSelectPrice() {
     this.isSelected = true;
-    console.log("**");
-    console.log(this.minSelectedPrice)
-    console.log("__")
-    console.log(this.maxSelectedPrice)
     let minPrice = this.minSelectedPrice.value;
     let maxPrice = this.maxSelectedPrice.value;
-    this.vehicleService.filterByPrice(minPrice, maxPrice);
+    if (minPrice > maxPrice) {
+      this.priceError = "Minimum Price cannot be greater than Maximum Price"
+    } else {
+      this.priceError = "";
+      this.vehicleService.filterByPrice(minPrice, maxPrice);
+    }
   }
 }

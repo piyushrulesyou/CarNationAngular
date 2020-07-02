@@ -7,7 +7,7 @@
         <app-vehicle-filters></app-vehicle-filters>
     </div>
     <div class="col-9" style="width: 70rem;">
-        <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in Delhi-NCR</h3>
+        <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in {{initialCitySelected}}</h3>
         <div *ngFor="let each of vehicleList; let i = index">
             <div class="card shadow-sm p-3 mb-5 bg-white rounded">
                 <div class="card-body">

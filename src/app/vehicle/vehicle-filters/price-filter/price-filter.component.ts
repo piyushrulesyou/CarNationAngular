@@ -8,11 +8,23 @@ import { VehicleService } from '../../vehicle-service/vehicle-service.service';
 })
 export class PriceFilterComponent implements OnInit {
 
-  prices: {
+  minPriceArray: {
     name: string,
     value: number
   }[] = [
       { name: '10,000', value: 10000 },
+      { name: '15,000', value: 15000 },
+      { name: '20,000', value: 20000 },
+      { name: '25,000', value: 25000 },
+      { name: '30,000', value: 30000 },
+      { name: '35,000', value: 35000 },
+      // { name: '40,000', value: 40000 }
+    ]
+  maxPriceArray: {
+    name: string,
+    value: number
+  }[] = [
+      // { name: '10,000', value: 10000 },
       { name: '15,000', value: 15000 },
       { name: '20,000', value: 20000 },
       { name: '25,000', value: 25000 },

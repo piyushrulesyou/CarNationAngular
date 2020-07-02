@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <h5>Price Range</h5>
+        <h6>Price Range</h6>
     </div>
     <div class="col clear_float">
         <div class="clear_all" *ngIf="isSelected" (click)="clearSelections()">ClearAll</div>
@@ -10,8 +10,8 @@
     <span class="alert alert-danger price_alert" *ngIf="priceError">{{priceError}}</span>
 </div>
 <div class="row">
-    <div class="col price_min">MIN</div>
-    <div class="col price_max">MAX</div>
+    <div class="col price_min min_max">MIN</div>
+    <div class="col price_max min_max">MAX</div>
 </div>
 
 <div class="row">
@@ -19,9 +19,10 @@
         <div class="ui-grid ui-grid-responsive ui-fluid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="dropdowns" autoWidth="false" [options]="prices" [(ngModel)]="minSelectedPrice"
-                        placeholder={{minPrice}} optionLabel="name" (onChange)="onSelectPrice()"
-                        [style]="{'width':'10px'}">
+                    <p-dropdown class="dropdowns" autoWidth="false" [options]="minPriceArray"
+                        [(ngModel)]="minSelectedPrice" placeholder={{minPrice}} optionLabel="name"
+                        (onChange)="onSelectPrice()"
+                        [style]="{'border-left':'0px','border-right':'0px','border-top':'0px','font-weight':'700'}">
                     </p-dropdown>
                 </div>
             </div>
@@ -31,8 +32,10 @@
         <div class="ui-grid ui-grid-responsive ui-fluid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="dropdowns" autoWidth="false" [options]="prices" [(ngModel)]="maxSelectedPrice"
-                        placeholder={{maxPrice}} optionLabel="name" (onChange)="onSelectPrice()">
+                    <p-dropdown class="dropdowns" autoWidth="false" [options]="maxPriceArray"
+                        [(ngModel)]="maxSelectedPrice" placeholder={{maxPrice}} optionLabel="name"
+                        (onChange)="onSelectPrice()"
+                        [style]="{'border-left':'0px','border-right':'0px','border-top':'0px','font-weight':'700'}">
                     </p-dropdown>
                 </div>
             </div>

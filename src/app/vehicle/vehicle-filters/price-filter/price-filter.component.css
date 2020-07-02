@@ -14,8 +14,18 @@
     margin-left: -30px;
 }
 
+.min_max {
+    font-size: 0.8rem;
+    color: gray;
+}
+
 .price_alert {
     font-size: 0.6rem;
     padding: 5px;
     margin-left: 1rem;
+}
+
+h6 {
+    margin-bottom: 1rem;
+    font-weight: 550;
 }

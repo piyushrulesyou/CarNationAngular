@@ -1,7 +1,4 @@
-.clear_all {
-    cursor: pointer;
-}
-
-.clear_float {
-    float: right;
+h6 {
+    margin-bottom: 1rem;
+    font-weight: 550;
 }

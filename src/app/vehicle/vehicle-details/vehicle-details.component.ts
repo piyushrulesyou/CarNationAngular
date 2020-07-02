@@ -1,6 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../vehicle-service/vehicle-service.service';
+import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -11,13 +12,19 @@ export class VehicleDetailsComponent implements OnInit {
 
   vehicleId: string;
   vehicleDetails: any;
+  vehicleDetailsList: any[];
   isLoading: boolean = false;
   colors: any[];
   deliveryDate: any = {};
 
-  constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute) { }
+  constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute, private cognitoUserService: CognitoUserService, private router: Router) { }
 
   ngOnInit(): void {
+
+    if (!this.cognitoUserService.isLoggedIn()) {
+      this.router.navigate(['/user/login']);
+    }
+
     this.isLoading = true;
     this.vehicleId = this.activatedRoute.snapshot.params['vehicleId'];
     this.activatedRoute.params.subscribe(
@@ -27,7 +34,8 @@ export class VehicleDetailsComponent implements OnInit {
     )
     this.vehicleService.getVehicleById(this.vehicleId).subscribe(
       response => {
-        this.vehicleDetails = response.data;
+        this.vehicleDetailsList = response.data.listVehicleDTO.splice(0);
+        this.vehicleDetails = this.vehicleDetailsList[0];
         this.colors = this.vehicleDetails.colorMaster;
         this.isLoading = false;
       }

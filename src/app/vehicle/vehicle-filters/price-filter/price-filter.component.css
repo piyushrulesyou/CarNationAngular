@@ -1,0 +1,15 @@
+.clear_all {
+    cursor: pointer;
+}
+
+.clear_float {
+    float: right;
+}
+
+.price_min {
+    margin-right: -20px;
+}
+
+.price_max {
+    margin-left: -30px;
+}

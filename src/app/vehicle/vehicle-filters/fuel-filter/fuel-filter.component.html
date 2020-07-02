@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col">
+        <h5>Fuel</h5>
+    </div>
+    <div class="col clear_float">
+        <div class="clear_all" *ngIf="selectedFuels.length!=0" (click)="clearSelections()">ClearAll</div>
+    </div>
+</div>
+
+<div *ngFor="let fuel of fuels">
+    <p-checkbox value={{fuel.fuelCode}} [(ngModel)]="selectedFuels" label={{fuel.fuelName}} (click)="onSelectFuel()">
+    </p-checkbox>
+</div>

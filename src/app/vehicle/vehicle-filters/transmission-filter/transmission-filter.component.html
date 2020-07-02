@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col">
+        <h5>Transmission</h5>
+    </div>
+    <div class="col clear_float">
+        <div class="clear_all" *ngIf="selectedTransmissions.length!=0" (click)="clearSelections()">ClearAll</div>
+    </div>
+</div>
+
+<div *ngFor="let transmission of transmissions">
+    <p-checkbox value={{transmission.transmissionCode}} [(ngModel)]="selectedTransmissions"
+        label={{transmission.transmissionName}} (click)="onSelectTransmission()">
+    </p-checkbox>
+</div>

@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CognitoUserService } from '../cognito-service/cognito-user.service';
 
-import { map, catchError, tap } from 'rxjs/operators'
+import { map, catchError, tap, finalize } from 'rxjs/operators'
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -34,7 +34,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
     let new_req = req.clone({ headers: headerNew, url: this.fullURL });
     return next.handle(new_req).pipe(
       map(req => req),
-      catchError(err => this.handleError(err))
+      catchError(err => this.handleError(err)),
+      // finalize(() => { this.loadingService.hide() })
     )
   }
 

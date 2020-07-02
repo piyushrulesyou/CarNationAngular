@@ -3,6 +3,10 @@ h4, h5 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.card {
+    margin-top: -1.5rem !important;
+}
+
 .points {
     border-bottom: 1px solid rgba(55, 59, 72, .1);
     padding-top: 0.7rem;

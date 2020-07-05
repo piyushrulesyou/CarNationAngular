@@ -22,7 +22,7 @@ export class BrandFilterComponent implements OnInit {
 
   clearSelections() {
     this.selectedBrands = [];
-    this.vehicleService.getAllVehicles();
+    this.onSelectBrand();
   }
 
   onSelectBrand() {

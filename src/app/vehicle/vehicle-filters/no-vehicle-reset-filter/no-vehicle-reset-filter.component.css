@@ -1,0 +1,44 @@
+.upper_border {
+    margin-bottom: 5rem;
+}
+
+.no_inventory {
+    text-align: center;
+}
+
+.or {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-weight: 650;
+    color: gray;
+}
+
+img {
+    width: 4rem;
+    height: 4rem;
+    margin-left: 24.5rem;
+    margin-bottom: 3rem;
+}
+
+a.reset_all {
+    border-radius: 0.1rem;
+    background-color: #1caba2;
+    color: white;
+    font-weight: 700;
+    border: 2px solid #ebebeb;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    cursor: pointer;
+}
+
+h6 {
+    font-weight: 550;
+    color: gray;
+}
+
+h4 {
+    font-weight: 650;
+    color: gray;
+}

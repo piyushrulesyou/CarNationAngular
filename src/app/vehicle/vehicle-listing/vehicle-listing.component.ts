@@ -41,14 +41,15 @@ export class VehicleListingComponent implements OnInit {
     this.vehicleService.getAllVehicles();
     this.vehicleService.vehicleInventory.subscribe(
       vehicles => {
-        if (vehicles.data.totalEnteries === 0) {
-          console.log("No inventory found for the current filters.");
+        if (vehicles.data == null) {
+          this.totalCars = 0;
+        } else {
+          this.vehicle = vehicles;
+          this.vehicleList = this.vehicle.data.listVehicleDTO;
+          this.totalCars = this.vehicleList.length;
+          this.isLoading = false;
+          this.basePriceArray = PriceUtil.priceWithCommaArrayBasePrice(this.vehicleList);
         }
-        this.vehicle = vehicles;
-        this.vehicleList = this.vehicle.data.listVehicleDTO;
-        this.totalCars = this.vehicle.data.totalEnteries;
-        this.isLoading = false;
-        this.basePriceArray = PriceUtil.priceWithCommaArrayBasePrice(this.vehicleList);
       }
     )
   }

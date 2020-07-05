@@ -16,6 +16,7 @@ import { FuelFilterComponent } from './vehicle-filters/fuel-filter/fuel-filter.c
 import { PriceFilterComponent } from './vehicle-filters/price-filter/price-filter.component';
 import { SegmentFilterComponent } from './vehicle-filters/segment-filter/segment-filter.component';
 import { TransmissionFilterComponent } from './vehicle-filters/transmission-filter/transmission-filter.component';
+import { NoVehicleResetFilterComponent } from './vehicle-filters/no-vehicle-reset-filter/no-vehicle-reset-filter.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { TransmissionFilterComponent } from './vehicle-filters/transmission-filt
         FuelFilterComponent,
         PriceFilterComponent,
         SegmentFilterComponent,
-        TransmissionFilterComponent
+        TransmissionFilterComponent,
+        NoVehicleResetFilterComponent
     ],
     imports: [
         SharedModule,

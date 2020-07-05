@@ -7,36 +7,42 @@
         <app-vehicle-filters></app-vehicle-filters>
     </div>
     <div class="col-9" style="width: 70rem;">
-        <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in {{initialCitySelected}}</h3>
-        <div *ngFor="let each of vehicleList; let i = index">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img class="car" src="{{each.smallSizeImage}}">
-                        </div>
-                        <div class="col-sm-6">
-                            <b class="car_name">{{each.producer.producerName + " " + each.model}}</b>
-                            <br>
-                            <div class="attributes">
-                                <img class="icon"
-                                    src="{{each.fuelType.fuelTypeImage}}">&nbsp;{{each.fuelType.fuelName}}&nbsp;&nbsp;
+        <div *ngIf="totalCars==0; else inventoryPresent">
+            <app-no-vehicle-reset-filter></app-no-vehicle-reset-filter>
+        </div>
+        <ng-template #inventoryPresent>
+            <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in {{initialCitySelected}}</h3>
+            <div *ngFor="let each of vehicleList; let i = index">
+                <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img class="car" src="{{each.smallSizeImage}}">
+                            </div>
+                            <div class="col-sm-6">
+                                <b class="car_name">{{each.producer.producerName + " " + each.model}}</b>
+                                <br>
+                                <div class="attributes">
+                                    <img class="icon"
+                                        src="{{each.fuelType.fuelTypeImage}}">&nbsp;{{each.fuelType.fuelName}}&nbsp;&nbsp;
 
-                                <img class="icon"
-                                    src="{{each.transmissionType.transmissionTypeImage}}">&nbsp;{{each.transmissionType.transmissionTypeName}}
+                                    <img class="icon"
+                                        src="{{each.transmissionType.transmissionTypeImage}}">&nbsp;{{each.transmissionType.transmissionTypeName}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="rupee_symbol">₹</span>
+                                <span
+                                    class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute}}</span>
+                                <span class="month">/month</span>
+                                <br>
+                                <span class="price_before">₹{{basePriceArray[i]}}</span>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <span class="rupee_symbol">₹</span>
-                            <span class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute}}</span>
-                            <span class="month">/month</span>
-                            <br>
-                            <span class="price_before">₹{{basePriceArray[i]}}</span>
-                        </div>
+                        <a routerLink="/vehicle/vehicle-details/{{each.id}}" class="stretched-link"></a>
                     </div>
-                    <a routerLink="/vehicle/vehicle-details/{{each.id}}" class="stretched-link"></a>
                 </div>
             </div>
-        </div>
+        </ng-template>
     </div>
 </div>

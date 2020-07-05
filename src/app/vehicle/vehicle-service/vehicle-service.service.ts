@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { VehicleResponse, VehicleBrandResponse, CityResponse } from '../vehicle-models/VehicleModels';
+import { VehicleResponse, VehicleBrandResponse, CityResponse, VehicleFilterRequest } from '../vehicle-models/VehicleModels';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -16,6 +16,7 @@ export class VehicleService {
   response: any[];
   vehicleInventory = new Subject<VehicleResponse>();
   initialCitySubject = new Subject<string>();
+  filters: VehicleFilterRequest = new VehicleFilterRequest();
 
   constructor(private http: HttpClient) { }
 
@@ -41,63 +42,6 @@ export class VehicleService {
       );
   }
 
-  filterBySegmentType(suv: boolean, sedan: boolean, hatchback: boolean) {
-    let params = new HttpParams();
-    params = params.append('suv', suv.toString());
-    params = params.append('sedan', sedan.toString());
-    params = params.append('hatchback', hatchback.toString());
-    params = params.append('startPage', '0');
-    params = params.append('size', '10');
-    return this.http.get<VehicleResponse>('filters/segment', { params: params }).subscribe(
-      res => {
-        console.log(res);
-        this.vehicleInventory.next(res);
-      }
-    );
-  }
-
-  filterByTransmissionType(manual: boolean, auto: boolean) {
-    let params = new HttpParams();
-    params = params.append('manual', manual.toString());
-    params = params.append('auto', auto.toString());
-    params = params.append('startPage', '0');
-    params = params.append('size', '10');
-    return this.http.get<VehicleResponse>('filters/transmission', { params: params }).subscribe(
-      res => {
-        console.log(res);
-        this.vehicleInventory.next(res);
-      }
-    );
-  }
-
-  filterByFuelType(petrol: boolean, diesel: boolean) {
-    let params = new HttpParams();
-    params = params.append('petrol', petrol.toString());
-    params = params.append('diesel', diesel.toString());
-    params = params.append('startPage', '0');
-    params = params.append('size', '10');
-    return this.http.get<VehicleResponse>('filters/fuel', { params: params }).subscribe(
-      res => {
-        console.log(res);
-        this.vehicleInventory.next(res);
-      }
-    );
-  }
-
-  filterByPrice(minPrice: number, maxPrice: number) {
-    let params = new HttpParams();
-    params = params.append('minPrice', minPrice.toString());
-    params = params.append('maxPrice', maxPrice.toString());
-    params = params.append('startPage', '0');
-    params = params.append('size', '10');
-    return this.http.get<VehicleResponse>('filters/price', { params: params }).subscribe(
-      res => {
-        console.log(res);
-        this.vehicleInventory.next(res);
-      }
-    );
-  }
-
   getAllBrands() {
     return this.http.get<VehicleBrandResponse>('producer/get-producers');
   }
@@ -106,12 +50,124 @@ export class VehicleService {
     return this.http.get<CityResponse>('cities/get-cities');
   }
 
+  filterBySegmentType(suv: boolean, sedan: boolean, hatchback: boolean) {
+    if (suv == true || sedan == true || hatchback == true) {
+      this.filters.segment = true;
+      this.filters.suvSegment = suv;
+      this.filters.sedanSegment = sedan;
+      this.filters.hatchBackSegment = hatchback;
+    } else {
+      this.filters.segment = false;
+    }
+    this.filterVehicleListing();
+  }
+
+  filterByTransmissionType(manual: boolean, auto: boolean) {
+    if (manual == true || auto == true) {
+      this.filters.transmission = true;
+      this.filters.manualTransmission = manual;
+      this.filters.automaticTransmission = auto;
+    } else {
+      this.filters.transmission = false;
+    }
+    this.filterVehicleListing();
+  }
+
+  filterByFuelType(petrol: boolean, diesel: boolean) {
+    if (petrol == true || diesel == true) {
+      this.filters.fuel = true;
+      this.filters.petrolFuel = petrol;
+      this.filters.dieselFuel = diesel;
+    } else {
+      this.filters.fuel = false;
+    }
+    this.filterVehicleListing();
+  }
+
+  filterByPrice(minPrice: number, maxPrice: number) {
+    this.filters.price = true;
+    this.filters.minPrice = minPrice;
+    this.filters.maxPrice = maxPrice;
+    this.filterVehicleListing();
+  }
+
   filterByBrandName(brand?: string[]) {
+    if (brand.length == 0)
+      this.filters.brand = false
+    else {
+      this.filters.brand = true;
+      this.filters.brands = brand;
+    }
+    this.filterVehicleListing();
+  }
+
+  filterByCity(city: string) {
+    this.filters.city = true;
+    this.filters.cityName = city;
+    this.filterVehicleListing();
+  }
+
+  filterVehicleListing() {
+    return this.http.post<VehicleResponse>('filters/all-filters?startPage=0&size=10', this.filters).subscribe(
+      res => {
+        console.log(res);
+        this.vehicleInventory.next(res);
+      }
+    )
+  }
+
+  filterBySegmentType2(suv: boolean, sedan: boolean, hatchback: boolean) {
+    let params = new HttpParams();
+    params = params.append('suv', suv.toString());
+    params = params.append('sedan', sedan.toString());
+    params = params.append('hatchback', hatchback.toString());
+    return this.http.get<VehicleResponse>('filters/segment', { params: params }).subscribe(
+      res => {
+        console.log(res);
+        this.vehicleInventory.next(res);
+      }
+    );
+  }
+
+  filterByTransmissionType2(manual: boolean, auto: boolean) {
+    let params = new HttpParams();
+    params = params.append('manual', manual.toString());
+    params = params.append('auto', auto.toString());
+    return this.http.get<VehicleResponse>('filters/transmission', { params: params }).subscribe(
+      res => {
+        console.log(res);
+        this.vehicleInventory.next(res);
+      }
+    );
+  }
+
+  filterByFuelType2(petrol: boolean, diesel: boolean) {
+    let params = new HttpParams();
+    params = params.append('petrol', petrol.toString());
+    params = params.append('diesel', diesel.toString());
+    return this.http.get<VehicleResponse>('filters/fuel', { params: params }).subscribe(
+      res => {
+        console.log(res);
+        this.vehicleInventory.next(res);
+      }
+    );
+  }
+
+  filterByPrice2(minPrice: number, maxPrice: number) {
+    let params = new HttpParams();
+    params = params.append('minPrice', minPrice.toString());
+    params = params.append('maxPrice', maxPrice.toString());
+    return this.http.get<VehicleResponse>('filters/price', { params: params }).subscribe(
+      res => {
+        console.log(res);
+        this.vehicleInventory.next(res);
+      }
+    );
+  }
+
+  filterByBrandName2(brand?: string[]) {
     if (brand) {
-      let params = new HttpParams();
-      params = params.append('startPage', '0');
-      params = params.append('size', '10');
-      return this.http.post<VehicleResponse>('filters/brand', { brands: brand }, { params: params }).subscribe(
+      return this.http.post<VehicleResponse>('filters/brand', { brands: brand }).subscribe(
         res => {
           console.log(res);
           this.vehicleInventory.next(res);
@@ -120,11 +176,9 @@ export class VehicleService {
     }
   }
 
-  filterByCity(city: string) {
+  filterByCity2(city: string) {
     let params = new HttpParams();
     params = params.append('city', city);
-    params = params.append('startPage', '0');
-    params = params.append('size', '10');
     return this.http.get<VehicleResponse>('filters/city', { params: params }).subscribe(
       res => {
         console.log(res);

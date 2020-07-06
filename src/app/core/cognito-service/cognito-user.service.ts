@@ -125,18 +125,24 @@ export class CognitoUserService {
     })
   }
 
-  resendOTP(username: string) {
+  resendOTP(username: string): Observable<string> {
     const userData = {
       Username: username,
       Pool: this.getUserPool()
     }
     var cognitoUser = new CognitoUser(userData);
-    cognitoUser.resendConfirmationCode(function (err, res) {
-      if (err) {
-        console.log("Resending OTP failed!! Try again");
-      } else {
-        console.log("OTP resent successfully to registered email address.");
-      }
+    return new Observable<string>(observer => {
+      cognitoUser.resendConfirmationCode(function (err, res) {
+        if (err) {
+          console.log("Resending OTP failed!! Try again");
+          const otpResendError = 'Resending OTP failed!! Try again';
+          observer.next(otpResendError);
+        } else {
+          console.log("OTP resent successfully to registered email address.");
+          const otpResendSuccess = 'OTP resent successfully to registered email address.';
+          observer.error(otpResendSuccess);
+        }
+      })
     })
   }
 

@@ -1,6 +1,6 @@
 <br><br>
 <div class="container-fluid">
-    <div class="row login-box">
+    <div class="row signup-box">
         <div class="col-md-6 col-xs-12 col-sm-12 ">
             <app-login-carousel></app-login-carousel>
         </div>
@@ -66,26 +66,28 @@
 </div>
 
 
-
-<p-dialog id="signinModal" [(visible)]="displayOtp" modal="true" [style]="{width: '50vw'}" [closeOnEscape]="true"
-    [dismissableMask]="true" [draggable]="false" #otpModal>
-    <p-header>
-        OTP
-    </p-header>
+<p-dialog id="otpModal" [(visible)]="displayOtp" modal="true" [style]="{width: '50vw'}" [dismissableMask]="false"
+    [closeOnEscape]="false" [draggable]="false" #otpModal>
     <form (ngSubmit)="onSubmitOtp(otpForm)" #otpForm=ngForm>
-        <div class="row">
-            <div class="col-sm-5 form-group">
+        <div class="row input_otp">
+            <div class="form-group">
                 <label for="otp">
-                    <h4>OTP</h4>
+                    <h4>Enter OTP</h4>
                 </label>
-                <span *ngIf="otpError">{{otpError}}</span>
+                <div class="alert_span">
+                    <span *ngIf="otpError" class="alert alert-danger alert_span" role="alert">
+                        {{otpError}}
+                    </span>
+                </div>
+                <br>
                 <input type="text" id="otp" class="form-control" [(ngModel)]="otp" name="otp" #userotp="ngModel"
                     required>
             </div>
         </div>
-        <button pButton type="button" class="ui-button-rounded ui-button-secondary" (click)="resendOTP()">Resend
-            OTP</button>
-        <button class="btn btn-success button-lg float-right" type="submit" [disabled]="otpForm.invalid">Validate
-            OTP</button>
+        <button pButton type="button" class="ui-button-rounded ui-button-secondary" (click)="resendOTP()">
+            Resend OTP</button>
+        <button class="btn btn-success button-lg float-right" type="submit" [disabled]="otpForm.invalid">
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoadingOTP"></span>
+            <span *ngIf="isLoadingOTP">&nbsp;&nbsp;</span>Validate OTP</button>
     </form>
 </p-dialog>

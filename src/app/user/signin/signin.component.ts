@@ -11,11 +11,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
-  display: boolean = false;
   username: string;
   password: string;
-  errMsg: string;
   isLoading: boolean = false;
+  loginError: string;
 
   constructor(private cognitoUserService: CognitoUserService, private router: Router, private activateRoute: ActivatedRoute) { }
   returnURL: string;
@@ -43,22 +42,23 @@ export class SigninComponent implements OnInit {
 
   afterLogin(loginRes: CognitoLoginResponse) {
     this.isLoading = false;
-    if (loginRes.code === "INCORRECT_USERNAME_OR_PASSWORD") {
-      this.errMsg = "Incorrect username or password.";
-    } if (loginRes.code === "PASSWORD_CHANGE") {
-      this.errMsg = "Please change your password before logging in.";
-    } if (loginRes.code === "PASSWORD_RESET") {
-      this.errMsg = "Please reset your password before logging in.";
-    } if (loginRes.code === "VERIFY_OTP_FIRST") {
-      this.errMsg = "Please verify your password before logging in.";
-    }
     if (loginRes.code === "SUCCESS") {
-      this.display = false;
-
       if (this.returnURL)
         this.router.navigateByUrl(this.returnURL);
-      else
+      else {
         this.router.navigate(['/home']);
+      }
+    } else {
+      if (loginRes.code === "INCORRECT_USERNAME_OR_PASSWORD") {
+        this.loginError = "Incorrect username or password.";
+      } if (loginRes.code === "PASSWORD_CHANGE") {
+        this.loginError = "Please change your password before logging in.";
+      } if (loginRes.code === "PASSWORD_RESET") {
+        this.loginError = "Please reset your password before logging in.";
+      } if (loginRes.code === "VERIFY_OTP_FIRST") {
+        this.loginError = "Please verify your password before logging in.";
+      }
+      this.password = "";
     }
   }
 }

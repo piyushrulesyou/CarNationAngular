@@ -7,6 +7,11 @@
         <div class="col-md-4 col-xs-12 col-sm-12 ">
             <div class="card text-center">
                 <h5 class="card-title glow">CarNation</h5>
+                <div class="alert_span">
+                    <span *ngIf="loginError" class="alert alert-danger alert_span" role="alert">
+                        {{loginError}}
+                    </span>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-1 col-sm-1 col-xs-1"></div>
@@ -39,7 +44,7 @@
                                     <span *ngIf="isLoading">&nbsp;&nbsp;</span>
                                     SignIn</button>
                                 <hr>
-                                <span>New here! Signup instead
+                                <span><b>New here!</b>
                                     <a class="nav-link" routerLink="/user/signup">Signup</a>
                                 </span>
                             </form>

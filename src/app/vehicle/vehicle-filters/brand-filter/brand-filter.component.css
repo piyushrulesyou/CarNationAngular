@@ -1,6 +1,6 @@
 .clear_all {
     cursor: pointer;
-    color: blue;
+    color: #1caba2;
 }
 
 .clear_float {
@@ -10,4 +10,8 @@
 h6 {
     margin-bottom: 1rem;
     font-weight: 550;
+}
+
+:host>>>.ui-chkbox .ui-chkbox-box .ui-chkbox-icon {
+    background-color: #1caba2;
 }

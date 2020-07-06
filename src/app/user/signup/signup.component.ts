@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SigninComponent } from '../signin/signin.component';
 import { NgForm } from '@angular/forms';
 import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  displaySignup: boolean = false;
+  isLoading: boolean = false;
   displayOtp: boolean = false;
   username: string;
   email: string;
@@ -21,21 +19,17 @@ export class SignupComponent implements OnInit {
   otp: string;
   otpResponse: string;
   signinResponse: string;
+  otpError: string;
+  registerError: string;
 
   constructor(private cognitoUserService: CognitoUserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  showDialog() {
-    this.displaySignup = true;
-  }
-
   onSubmitSignup(signupForm: NgForm) {
-    this.username = signupForm.value.username;
-    this.password = signupForm.value.password;
-
-    this.cognitoUserService.signup(signupForm.value.email, signupForm.value.username, signupForm.value.password).subscribe(
+    this.isLoading = true;
+    this.cognitoUserService.signup(this.email, this.username, this.password).subscribe(
       data => {
         this.signupResponse = "Success";
         this.afterSignup();
@@ -43,15 +37,17 @@ export class SignupComponent implements OnInit {
       err => {
         console.log("Registration error has occured");
         console.log(JSON.stringify(err));
+        this.isLoading = false;
+        this.registerError = err.message;
+        this.password = "";
       }
     )
   }
   afterSignup() {
+    this.isLoading = false;
     if (this.signupResponse === "Success") {
-      this.displaySignup = false;
       this.displayOtp = true;
     } else {
-      this.displaySignup = true;
       this.displayOtp = false;
     }
   }
@@ -64,6 +60,7 @@ export class SignupComponent implements OnInit {
         this.afterOtp();
       },
       err => {
+        this.otpError = "Wrong OTP, please try again!";
         console.log("User verification failed!!");
         console.log(JSON.stringify(err));
       }
@@ -72,8 +69,10 @@ export class SignupComponent implements OnInit {
   afterOtp() {
     //code to auto signin the user only after successful signup
     this.cognitoUserService.signin(this.username, this.password).subscribe();
+    this.router.navigate(['/home']);
   }
   resendOTP() {
+    this.otp = '';
     this.cognitoUserService.resendOTP(this.username);
   }
 }

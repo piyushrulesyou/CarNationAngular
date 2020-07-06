@@ -9,7 +9,17 @@ import { Subject } from 'rxjs';
 })
 export class CityFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService) {
+    this.vehicleService.resetAllFilter.subscribe(
+      reset => {
+        if (reset == true) {
+          this.vehicleService.filterByCity(null);
+          this.vehicleService.initialCitySubject.next('Agra');
+          this.selectedCity = { cityCode: 'AGA', cityName: 'Agra' };
+        }
+      }
+    )
+  }
   cities: {
     cityCode: string,
     cityName: string

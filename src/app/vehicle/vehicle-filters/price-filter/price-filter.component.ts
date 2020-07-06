@@ -39,7 +39,15 @@ export class PriceFilterComponent implements OnInit {
   isSelected: boolean = false;
   priceError: string;
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService) {
+    this.vehicleService.resetAllFilter.subscribe(
+      reset => {
+        if (reset == true) {
+          this.clearSelections();
+        }
+      }
+    )
+  }
 
   ngOnInit(): void {
   }

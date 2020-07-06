@@ -15,6 +15,6 @@ export class NoVehicleResetFilterComponent implements OnInit {
 
   resetAll() {
     this.vehicleService.getAllVehicles();
+    this.vehicleService.resetAllFilter.next(true);
   }
-
 }

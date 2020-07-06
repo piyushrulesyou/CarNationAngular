@@ -8,7 +8,15 @@ import { VehicleService } from '../../vehicle-service/vehicle-service.service';
 })
 export class TransmissionFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService) {
+    this.vehicleService.resetAllFilter.subscribe(
+      reset => {
+        if (reset == true) {
+          this.clearSelections();
+        }
+      }
+    )
+  }
 
   transmissions: {
     transmissionCode: string,

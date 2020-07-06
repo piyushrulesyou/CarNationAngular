@@ -17,6 +17,7 @@ export class VehicleService {
   vehicleInventory = new Subject<VehicleResponse>();
   initialCitySubject = new Subject<string>();
   filters: VehicleFilterRequest = new VehicleFilterRequest();
+  resetAllFilter = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +26,7 @@ export class VehicleService {
       res => {
         console.log(res);
         this.vehicleInventory.next(res);
+        this.initialCitySubject.next('Agra');
       }
     );
   }
@@ -102,8 +104,12 @@ export class VehicleService {
   }
 
   filterByCity(city: string) {
-    this.filters.city = true;
-    this.filters.cityName = city;
+    if (city == null)
+      this.filters.city = false;
+    else {
+      this.filters.city = true;
+      this.filters.cityName = city;
+    }
     this.filterVehicleListing();
   }
 

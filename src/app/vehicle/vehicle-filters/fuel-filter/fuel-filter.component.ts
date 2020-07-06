@@ -8,7 +8,15 @@ import { VehicleService } from '../../vehicle-service/vehicle-service.service';
 })
 export class FuelFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService) {
+    this.vehicleService.resetAllFilter.subscribe(
+      reset => {
+        if (reset == true) {
+          this.clearSelections();
+        }
+      }
+    )
+  }
 
   fuels: {
     fuelCode: string,

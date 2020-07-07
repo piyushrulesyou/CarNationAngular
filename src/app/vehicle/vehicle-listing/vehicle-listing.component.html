@@ -31,12 +31,12 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <span class="rupee_symbol">₹</span>
                                 <span
-                                    class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute}}</span>
+                                    class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute | currency:'INR':'symbol':'1.0'}}</span>
                                 <span class="month">/month</span>
                                 <br>
-                                <span class="price_before">₹{{basePriceArray[i]}}</span>
+                                <span
+                                    class="price_before">{{basePriceArray[i].priceMaster.basePrice | currency:'INR':'symbol':'1.0' }}</span>
                             </div>
                         </div>
                         <a routerLink="/vehicle/vehicle-details/{{each.id}}" class="stretched-link"></a>

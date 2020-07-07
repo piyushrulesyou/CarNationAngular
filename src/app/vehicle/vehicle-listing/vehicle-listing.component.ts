@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { VehicleResponse } from '../vehicle-models/VehicleModels';
 import { VehicleService } from '../vehicle-service/vehicle-service.service';
-import { PriceUtil } from '../../utils/PriceUtil';
 import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
 import { Router } from '@angular/router';
-import { LoadingService } from '../../core/loading-service/loading-service.service';
 
 @Component({
   selector: 'app-vehicle-listing',
@@ -48,7 +45,7 @@ export class VehicleListingComponent implements OnInit {
           this.vehicleList = this.vehicle.data.listVehicleDTO;
           this.totalCars = this.vehicleList.length;
           this.isLoading = false;
-          this.basePriceArray = PriceUtil.priceWithCommaArrayBasePrice(this.vehicleList);
+          this.basePriceArray = this.vehicleList;
         }
       }
     )

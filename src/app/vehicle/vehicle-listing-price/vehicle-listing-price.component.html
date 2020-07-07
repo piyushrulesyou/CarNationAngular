@@ -16,8 +16,9 @@
                 </ng-template>
             </div>
             <div class="price" *ngIf="showPrice">
-                <span class="new_price">₹&nbsp;{{discountedPriceWithComma}}</span>
-                <span class="new_price_month">/month&nbsp;<span class="old_price">₹{{basePriceWithComma}}</span>
+                <span class="new_price">{{discountedPrice | currency:'INR':'symbol':'1.0' }}</span>
+                <span class="new_price_month">/month&nbsp;<span
+                        class="old_price">{{basePrice | currency:'INR':'symbol':'1.0' }}</span>
                     <br>(Inclusive of Taxes)
                 </span>
             </div>

@@ -21,8 +21,6 @@ export class VehicleListingPriceComponent implements OnInit {
   showPrice: boolean = false;
   highlightMonth: boolean = false;
   index: number;
-  basePriceWithComma: string;
-  discountedPriceWithComma: string;
 
   ngOnInit(): void {
     this.priceMaster = this.vehicleService.price;
@@ -78,7 +76,5 @@ export class VehicleListingPriceComponent implements OnInit {
     this.index = index;
     this.basePrice = this.priceMaster.basePrice * this.tenureArray[index].price;
     this.discountedPrice = (this.priceMaster.basePrice - this.priceMaster.discountAbsolute) * this.tenureArray[index].price;
-    this.basePriceWithComma = PriceUtil.priceWithComma(this.basePrice);
-    this.discountedPriceWithComma = PriceUtil.priceWithComma(this.discountedPrice);
   }
 }

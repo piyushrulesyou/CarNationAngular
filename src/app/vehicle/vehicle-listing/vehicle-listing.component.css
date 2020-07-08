@@ -55,3 +55,11 @@ img.car {
 .car_name {
     font-size: 1.5rem !important;
 }
+
+.pagination_pages {
+    cursor: pointer;
+}
+
+.highlight {
+    background-color: green;
+}

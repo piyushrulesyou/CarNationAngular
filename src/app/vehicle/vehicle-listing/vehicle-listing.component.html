@@ -43,6 +43,23 @@
                     </div>
                 </div>
             </div>
+            <div>
+                totalPages{{totalPages}}
+                <br>
+                pageNumber{{pageNumber+1}}
+                <br>
+                <div class="row" style="align-items: center;">
+                    <button class="btn btn btn-primary" (click)="changePage(pageNumber-1)"
+                        [disabled]="pageNumber<=0">Previous</button>
+                    <span *ngFor="let page of paginationArray; let i = index" (click)="changePage(i)">
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="pagination_pages" [ngClass]="{'highlight': i==pageNumber}">{{i+1}}</span>
+                        &nbsp;&nbsp;&nbsp;
+                    </span>
+                    <button class="btn btn btn-primary" (click)="changePage(pageNumber+1)"
+                        [disabled]="pageNumber==totalPages-1">Next</button>
+                </div>
+            </div>
         </ng-template>
     </div>
 </div>

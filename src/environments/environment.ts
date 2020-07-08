@@ -8,7 +8,8 @@ export const environment = {
   userPoolId: 'ap-south-1_OeY8LHGsz',
   clientId: '2gt58uiktcdku5d24fg67m53ln',
   baseURL: 'https://kka6cqubal.execute-api.ap-south-1.amazonaws.com/dev/',
-  tokenRefreshTime: 3300
+  tokenRefreshTime: 3300,
+  carsPerPage: 2
 };
 
 /*

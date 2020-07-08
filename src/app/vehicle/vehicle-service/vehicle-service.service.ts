@@ -21,8 +21,8 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  getAllVehicles() {
-    return this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle?startPage=0&size=10').subscribe(
+  getAllVehicles(startPage: number, size: number) {
+    return this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle?startPage=' + startPage + '&size=' + size).subscribe(
       res => {
         console.log(res);
         this.vehicleInventory.next(res);

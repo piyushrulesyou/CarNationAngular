@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../vehicle-service/vehicle-service.service';
-import { PriceUtil } from '../../utils/PriceUtil';
 
 @Component({
   selector: 'app-vehicle-listing-price',

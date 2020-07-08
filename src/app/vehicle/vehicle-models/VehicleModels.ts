@@ -49,39 +49,23 @@ export class VehicleFilterRequest {
   public brand: boolean
   public brands: string[]
 
-  VehicleFilterRequest(city: boolean,
-    cityName: string,
-    price: boolean,
-    minPrice: number,
-    maxPrice: number,
-    segment: boolean,
-    suvSegment: boolean,
-    hatchBackSegment: boolean,
-    sedanSegment: boolean,
-    fuel: boolean,
-    petrolFuel: boolean,
-    dieselFuel: boolean,
-    transmission: boolean,
-    manualTransmission: boolean,
-    automaticTransmission: boolean,
-    brand: boolean,
-    brands: string[]) {
-    this.city = city;
-    this.cityName = cityName;
-    this.price = price;
-    this.minPrice = minPrice;
-    this.maxPrice = maxPrice;
-    this.segment = segment;
-    this.suvSegment = suvSegment;
-    this.hatchBackSegment = hatchBackSegment;
-    this.sedanSegment = sedanSegment;
-    this.fuel = fuel;
-    this.petrolFuel = petrolFuel;
-    this.dieselFuel = dieselFuel;
-    this.transmission = transmission;
-    this.manualTransmission = manualTransmission;
-    this.automaticTransmission = automaticTransmission;
-    this.brand = brand;
-    this.brands = brands;
+  VehicleFilterRequest() {
+    this.city = false;
+    this.cityName = '';
+    this.price = false;
+    this.minPrice = 0;
+    this.maxPrice = 0;
+    this.segment = false;
+    this.suvSegment = false;
+    this.hatchBackSegment = false;
+    this.sedanSegment = false;
+    this.fuel = false;
+    this.petrolFuel = false;
+    this.dieselFuel = false;
+    this.transmission = false;
+    this.manualTransmission = false;
+    this.automaticTransmission = false;
+    this.brand = false;
+    this.brands = [];
   }
 }

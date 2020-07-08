@@ -17,6 +17,8 @@ export class VehicleListingComponent implements OnInit {
 
   isLoading: boolean = false;
 
+  nextButton: string = '>';
+  prevButton: string = '<';
   totalCars: number;
   vehicle: VehicleResponse;
   vehicleList: any[];
@@ -25,10 +27,9 @@ export class VehicleListingComponent implements OnInit {
   initialCitySelected: string = 'Agra';
   totalPages: number;
   totalEnteries: number;
-  carsPerPage: number = environment.carsPerPage;
-  pageNumber: number = 0;
+  pageNumber: number;
   paginationArray: number[] = [];
-  initial: boolean = true;
+  newInventory: boolean = true;
 
   ngOnInit(): void {
 
@@ -38,16 +39,24 @@ export class VehicleListingComponent implements OnInit {
       }
     )
 
-    if (!this.cognitoUserService.isLoggedIn()) {
-      this.router.navigate(['/user/login']);
-    }
     this.isLoading = true;
     this.initialVehicleListing();
+    this.vehicleService.pageNumber.subscribe(
+      currentPage => {
+        this.pageNumber = currentPage;
+      }
+    )
+    this.vehicleService.newInventoryLoaded.subscribe(
+      isNewInventory => {
+        this.newInventory = isNewInventory;
+      }
+    )
   }
 
   initialVehicleListing() {
     this.pageNumber = 0;
-    this.vehicleService.getAllVehicles(this.pageNumber, this.carsPerPage);
+    this.vehicleService.pageNumber.next(0);
+    this.vehicleService.filterVehicleListing(this.pageNumber);
     this.vehicleService.vehicleInventory.subscribe(
       vehicles => {
         if (vehicles.data == null) {
@@ -60,16 +69,18 @@ export class VehicleListingComponent implements OnInit {
   }
 
   changePage(pageNumber: number) {
-    this.pageNumber = pageNumber;
-    this.vehicleService.getAllVehicles(this.pageNumber, this.carsPerPage);
-    this.vehicleService.vehicleInventory.subscribe(
-      vehicles => {
-        if (vehicles.data == null) {
-          this.totalCars = 0;
-        } else {
-          this.handleVehicleListing(vehicles);
-        }
-      })
+    if (this.pageNumber != pageNumber) {
+      this.pageNumber = pageNumber;
+      this.vehicleService.filterVehicleListing(this.pageNumber);
+      this.vehicleService.vehicleInventory.subscribe(
+        vehicles => {
+          if (vehicles.data == null) {
+            this.totalCars = 0;
+          } else {
+            this.handleVehicleListing(vehicles);
+          }
+        })
+    }
   }
 
   handleVehicleListing(vehicles: VehicleResponse) {
@@ -84,11 +95,12 @@ export class VehicleListingComponent implements OnInit {
   }
 
   preparePaginationArray() {
-    if (this.initial === true) {
+    if (this.newInventory === true) {
+      this.paginationArray = [];
       for (let index = 0; index < this.totalPages; index++) {
         this.paginationArray.push(index + 1);
       }
     }
-    this.initial = false;
+    this.newInventory = false;
   }
 }

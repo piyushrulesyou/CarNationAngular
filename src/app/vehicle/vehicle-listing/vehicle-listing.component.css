@@ -60,6 +60,21 @@ img.car {
     cursor: pointer;
 }
 
+.disabled {
+    cursor: default;
+}
+
 .highlight {
-    background-color: green;
+    background-color: #007ad9;
+    color: white;
+    border-radius: 50%;
+    padding-left: 4px;
+    cursor: default;
+}
+
+.pagination {
+    align-items: center;
+    margin-top: 3rem;
+    float: right;
+    margin-right: 0rem;
 }

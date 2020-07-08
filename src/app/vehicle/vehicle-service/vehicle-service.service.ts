@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { VehicleResponse, VehicleBrandResponse, CityResponse, VehicleFilterRequest } from '../vehicle-models/VehicleModels';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,15 @@ export class VehicleService {
   initialCitySubject = new Subject<string>();
   filters: VehicleFilterRequest = new VehicleFilterRequest();
   resetAllFilter = new Subject<boolean>();
+  carsPerPage: number = environment.carsPerPage;
+  pageNumber = new Subject<number>();
+  newInventoryLoaded = new Subject<boolean>();
+
 
   constructor(private http: HttpClient) { }
 
-  getAllVehicles(startPage: number, size: number) {
-    return this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle?startPage=' + startPage + '&size=' + size).subscribe(
+  getAllVehicles(startPage: number) {
+    return this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle?startPage=' + startPage + '&size=' + this.carsPerPage).subscribe(
       res => {
         console.log(res);
         this.vehicleInventory.next(res);
@@ -61,7 +66,7 @@ export class VehicleService {
     } else {
       this.filters.segment = false;
     }
-    this.filterVehicleListing();
+    this.filterVehicleListing(0);
   }
 
   filterByTransmissionType(manual: boolean, auto: boolean) {
@@ -72,7 +77,7 @@ export class VehicleService {
     } else {
       this.filters.transmission = false;
     }
-    this.filterVehicleListing();
+    this.filterVehicleListing(0);
   }
 
   filterByFuelType(petrol: boolean, diesel: boolean) {
@@ -83,14 +88,14 @@ export class VehicleService {
     } else {
       this.filters.fuel = false;
     }
-    this.filterVehicleListing();
+    this.filterVehicleListing(0);
   }
 
   filterByPrice(minPrice: number, maxPrice: number) {
     this.filters.price = true;
     this.filters.minPrice = minPrice;
     this.filters.maxPrice = maxPrice;
-    this.filterVehicleListing();
+    this.filterVehicleListing(0);
   }
 
   filterByBrandName(brand?: string[]) {
@@ -100,7 +105,7 @@ export class VehicleService {
       this.filters.brand = true;
       this.filters.brands = brand;
     }
-    this.filterVehicleListing();
+    this.filterVehicleListing(0);
   }
 
   filterByCity(city: string) {
@@ -110,11 +115,19 @@ export class VehicleService {
       this.filters.city = true;
       this.filters.cityName = city;
     }
-    this.filterVehicleListing();
+    this.filterVehicleListing(0);
   }
 
-  filterVehicleListing() {
-    return this.http.post<VehicleResponse>('filters/all-filters?startPage=0&size=10', this.filters).subscribe(
+  clearAllFilters() {
+    this.filters = new VehicleFilterRequest();
+    this.filterVehicleListing(0);
+  }
+
+  filterVehicleListing(pageNumber: number) {
+    this.pageNumber.next(pageNumber);
+    if (pageNumber == 0)
+      this.newInventoryLoaded.next(true);
+    return this.http.post<VehicleResponse>('filters/all-filters?startPage=' + pageNumber + '&size=' + this.carsPerPage, this.filters).subscribe(
       res => {
         console.log(res);
         this.vehicleInventory.next(res);

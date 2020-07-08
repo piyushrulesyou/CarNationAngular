@@ -10,56 +10,55 @@
         <div *ngIf="totalCars==0; else inventoryPresent">
             <app-no-vehicle-reset-filter></app-no-vehicle-reset-filter>
         </div>
-        <ng-template #inventoryPresent>
-            <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in {{initialCitySelected}}</h3>
-            <div *ngFor="let each of vehicleList; let i = index">
-                <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img class="car" src="{{each.smallSizeImage}}">
-                            </div>
-                            <div class="col-sm-6">
-                                <b class="car_name">{{each.producer.producerName + " " + each.model}}</b>
-                                <br>
-                                <div class="attributes">
-                                    <img class="icon"
-                                        src="{{each.fuelType.fuelTypeImage}}">&nbsp;{{each.fuelType.fuelName}}&nbsp;&nbsp;
+        <div class="row">
+            <ng-template #inventoryPresent>
+                <h3 class="total_cars" *ngIf="!isLoading && vehicleList">{{totalCars}} cars in {{initialCitySelected}}
+                </h3>
+                <div *ngFor="let each of vehicleList; let i = index">
+                    <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img class="car" src="{{each.smallSizeImage}}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <b class="car_name">{{each.producer.producerName + " " + each.model}}</b>
+                                    <br>
+                                    <div class="attributes">
+                                        <img class="icon"
+                                            src="{{each.fuelType.fuelTypeImage}}">&nbsp;{{each.fuelType.fuelName}}&nbsp;&nbsp;
 
-                                    <img class="icon"
-                                        src="{{each.transmissionType.transmissionTypeImage}}">&nbsp;{{each.transmissionType.transmissionTypeName}}
+                                        <img class="icon"
+                                            src="{{each.transmissionType.transmissionTypeImage}}">&nbsp;{{each.transmissionType.transmissionTypeName}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <span
+                                        class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute | currency:'INR':'symbol':'1.0'}}</span>
+                                    <span class="month">/month</span>
+                                    <br>
+                                    <span
+                                        class="price_before">{{basePriceArray[i].priceMaster.basePrice | currency:'INR':'symbol':'1.0' }}</span>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <span
-                                    class="price">{{each.priceMaster.basePrice-each.priceMaster.discountAbsolute | currency:'INR':'symbol':'1.0'}}</span>
-                                <span class="month">/month</span>
-                                <br>
-                                <span
-                                    class="price_before">{{basePriceArray[i].priceMaster.basePrice | currency:'INR':'symbol':'1.0' }}</span>
-                            </div>
+                            <a routerLink="/vehicle/vehicle-details/{{each.id}}" class="stretched-link"></a>
                         </div>
-                        <a routerLink="/vehicle/vehicle-details/{{each.id}}" class="stretched-link"></a>
                     </div>
                 </div>
-            </div>
-            <div>
-                totalPages{{totalPages}}
-                <br>
-                pageNumber{{pageNumber+1}}
-                <br>
-                <div class="row" style="align-items: center;">
-                    <button class="btn btn btn-primary" (click)="changePage(pageNumber-1)"
-                        [disabled]="pageNumber<=0">Previous</button>
-                    <span *ngFor="let page of paginationArray; let i = index" (click)="changePage(i)">
-                        &nbsp;&nbsp;&nbsp;
-                        <span class="pagination_pages" [ngClass]="{'highlight': i==pageNumber}">{{i+1}}</span>
-                        &nbsp;&nbsp;&nbsp;
-                    </span>
-                    <button class="btn btn btn-primary" (click)="changePage(pageNumber+1)"
-                        [disabled]="pageNumber==totalPages-1">Next</button>
-                </div>
-            </div>
-        </ng-template>
+            </ng-template>
+        </div>
+        <div class="row pagination" *ngIf="totalCars!=0">
+            <button pButton icon="pi pi-chevron-circle-left" (click)="changePage(pageNumber-1)"
+                [disabled]="pageNumber<=0" [ngClass]="{'disabled':pageNumber<=0}"></button>
+            <span *ngFor="let page of paginationArray; let i = index" (click)="changePage(page-1)">
+                &nbsp;&nbsp;
+                <span class="pagination_pages" [ngClass]="{'highlight': i==pageNumber}">
+                    &nbsp;{{i+1}}&nbsp;
+                </span>
+                &nbsp;&nbsp;
+            </span>
+            <button pButton icon="pi pi-chevron-circle-right" (click)="changePage(pageNumber+1)"
+                [disabled]="pageNumber==totalPages-1" [ngClass]="{'disabled':pageNumber==totalPages-1}"></button>
+        </div>
     </div>
 </div>

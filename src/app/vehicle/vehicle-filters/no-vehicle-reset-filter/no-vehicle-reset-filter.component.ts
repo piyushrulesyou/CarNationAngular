@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../vehicle-service/vehicle-service.service';
-import { VehicleListingComponent } from '../../vehicle-listing/vehicle-listing.component';
 
 @Component({
   selector: 'app-no-vehicle-reset-filter',
@@ -9,14 +8,13 @@ import { VehicleListingComponent } from '../../vehicle-listing/vehicle-listing.c
 })
 export class NoVehicleResetFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService,
-    private vehicleListingComponent: VehicleListingComponent) { }
+  constructor(private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
   }
 
   resetAll() {
-    this.vehicleListingComponent.initialVehicleListing();
+    this.vehicleService.clearAllFilters();
     this.vehicleService.resetAllFilter.next(true);
   }
 }

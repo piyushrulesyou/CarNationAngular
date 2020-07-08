@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button'
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { DropdownModule } from 'primeng/dropdown';
         HttpClientModule,
         FormsModule,
         CheckboxModule,
-        DropdownModule
+        DropdownModule,
+        ButtonModule
     ],
     providers: [],
     exports: [
@@ -26,7 +28,8 @@ import { DropdownModule } from 'primeng/dropdown';
         LoginCarouselComponent,
         FormsModule,
         CheckboxModule,
-        DropdownModule
+        DropdownModule,
+        ButtonModule
     ]
 })
 

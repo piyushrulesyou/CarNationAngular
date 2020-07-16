@@ -20,7 +20,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-8">
                     <p-dropdown class="dropdowns" autoWidth="false" [options]="minPriceArray"
-                        [(ngModel)]="minSelectedPrice" placeholder={{minPrice}} optionLabel="name"
+                        [(ngModel)]="vehicleService.minSelectedPrice" placeholder={{minPrice}} optionLabel="name"
                         (onChange)="onSelectPrice()"
                         [style]="{'border-left':'0px','border-right':'0px','border-top':'0px','font-weight':'700'}">
                     </p-dropdown>
@@ -33,7 +33,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-8">
                     <p-dropdown class="dropdowns" autoWidth="false" [options]="maxPriceArray"
-                        [(ngModel)]="maxSelectedPrice" placeholder={{maxPrice}} optionLabel="name"
+                        [(ngModel)]="vehicleService.maxSelectedPrice" placeholder={{maxPrice}} optionLabel="name"
                         (onChange)="onSelectPrice()"
                         [style]="{'border-left':'0px','border-right':'0px','border-top':'0px','font-weight':'700'}">
                     </p-dropdown>

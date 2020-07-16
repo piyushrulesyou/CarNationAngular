@@ -14,6 +14,8 @@ export class VehicleService {
   selectedTransmissions: string[] = [];
   selectedFuels: string[] = [];
   selectedBrands: string[] = [];
+  minSelectedPrice: any = { name: '10,000', value: 10000 };
+  maxSelectedPrice: any = { name: '40,000', value: 40000 };
 
   priceMaster = new Subject<any>();
   tenureMaster = new Subject<any>();
@@ -70,7 +72,7 @@ export class VehicleService {
   }
 
   filterBySegmentType(suv: boolean, sedan: boolean, hatchback: boolean) {
-    if (suv == true || sedan == true || hatchback == true) {
+    if (suv || sedan || hatchback) {
       this.filters.segment = true;
       this.filters.suvSegment = suv;
       this.filters.sedanSegment = sedan;
@@ -83,7 +85,7 @@ export class VehicleService {
   }
 
   filterByTransmissionType(manual: boolean, auto: boolean) {
-    if (manual == true || auto == true) {
+    if (manual || auto) {
       this.filters.transmission = true;
       this.filters.manualTransmission = manual;
       this.filters.automaticTransmission = auto;
@@ -95,7 +97,7 @@ export class VehicleService {
   }
 
   filterByFuelType(petrol: boolean, diesel: boolean) {
-    if (petrol == true || diesel == true) {
+    if (petrol || diesel) {
       this.filters.fuel = true;
       this.filters.petrolFuel = petrol;
       this.filters.dieselFuel = diesel;
@@ -146,7 +148,7 @@ export class VehicleService {
     this.pageNumber.next(pageNumber);
     if (pageNumber == 0)
       this.newInventoryLoaded.next(true);
-    if (onInit == true) {
+    if (onInit) {
       this.filters.city = true;
       this.filters.cityName = localStorage.getItem('cityCode');
       this.appliedFilters.next(this.filters);

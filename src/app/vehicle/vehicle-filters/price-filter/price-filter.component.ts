@@ -18,13 +18,11 @@ export class PriceFilterComponent implements OnInit {
       { name: '25,000', value: 25000 },
       { name: '30,000', value: 30000 },
       { name: '35,000', value: 35000 },
-      // { name: '40,000', value: 40000 }
     ]
   maxPriceArray: {
     name: string,
     value: number
   }[] = [
-      // { name: '10,000', value: 10000 },
       { name: '15,000', value: 15000 },
       { name: '20,000', value: 20000 },
       { name: '25,000', value: 25000 },
@@ -34,15 +32,14 @@ export class PriceFilterComponent implements OnInit {
     ]
   minPrice: string = '10,000';
   maxPrice: string = '40,000';
-  minSelectedPrice: any = { name: '10,000', value: 10000 };
-  maxSelectedPrice: any = { name: '40,000', value: 40000 };
+
   isSelected: boolean = false;
   priceError: string;
 
-  constructor(private vehicleService: VehicleService) {
+  constructor(public vehicleService: VehicleService) {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
-        if (reset == true) {
+        if (reset) {
           this.clearSelections();
         }
       }
@@ -50,22 +47,24 @@ export class PriceFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.vehicleService.minSelectedPrice.value != 10000 || this.vehicleService.maxSelectedPrice.value != 40000)
+      this.isSelected = true;
   }
 
   clearSelections() {
     this.isSelected = false;
     this.priceError = "";
-    this.minSelectedPrice = { name: '10,000', value: 10000 };
-    this.maxSelectedPrice = { name: '40,000', value: 40000 };
-    let minPrice = this.minSelectedPrice.value;
-    let maxPrice = this.maxSelectedPrice.value;
+    this.vehicleService.minSelectedPrice = { name: '10,000', value: 10000 };
+    this.vehicleService.maxSelectedPrice = { name: '40,000', value: 40000 };
+    let minPrice = this.vehicleService.minSelectedPrice.value;
+    let maxPrice = this.vehicleService.maxSelectedPrice.value;
     this.vehicleService.filterByPrice(minPrice, maxPrice);
   }
 
   onSelectPrice() {
     this.isSelected = true;
-    let minPrice = this.minSelectedPrice.value;
-    let maxPrice = this.maxSelectedPrice.value;
+    let minPrice = this.vehicleService.minSelectedPrice.value;
+    let maxPrice = this.vehicleService.maxSelectedPrice.value;
     if (minPrice > maxPrice) {
       this.priceError = "Minimum Price cannot be greater than Maximum Price"
     } else {

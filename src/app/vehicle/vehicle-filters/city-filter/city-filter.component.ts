@@ -12,7 +12,7 @@ export class CityFilterComponent implements OnInit {
   constructor(private vehicleService: VehicleService) {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
-        if (reset == true) {
+        if (reset) {
           this.vehicleService.filterByCity(null);
           this.selectedCity = { cityCode: environment.initialCityCode, cityName: environment.initialCityName };
         }

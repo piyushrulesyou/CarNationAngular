@@ -101,7 +101,7 @@ export class VehicleListingComponent implements OnInit {
   }
 
   preparePaginationArray() {
-    if (this.newInventory === true) {
+    if (this.newInventory) {
       this.paginationArray = [];
       for (let index = 0; index < this.totalPages; index++) {
         this.paginationArray.push(index + 1);

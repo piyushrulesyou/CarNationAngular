@@ -11,7 +11,7 @@ export class TransmissionFilterComponent implements OnInit {
   constructor(public vehicleService: VehicleService) {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
-        if (reset == true) {
+        if (reset) {
           this.clearSelections();
         }
       }

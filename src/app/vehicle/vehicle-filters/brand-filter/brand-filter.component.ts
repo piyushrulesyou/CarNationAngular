@@ -8,7 +8,7 @@ import { VehicleService } from '../../vehicle-service/vehicle-service.service';
 })
 export class BrandFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) {
+  constructor(public vehicleService: VehicleService) {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
         if (reset == true) {
@@ -18,7 +18,6 @@ export class BrandFilterComponent implements OnInit {
     )
   }
   brandList: any[];
-  selectedBrands: string[] = [];
 
   ngOnInit(): void {
     this.vehicleService.getAllBrands().subscribe(
@@ -29,11 +28,11 @@ export class BrandFilterComponent implements OnInit {
   }
 
   clearSelections() {
-    this.selectedBrands = [];
+    this.vehicleService.selectedBrands = [];
     this.onSelectBrand();
   }
 
   onSelectBrand() {
-    this.vehicleService.filterByBrandName(this.selectedBrands);
+    this.vehicleService.filterByBrandName(this.vehicleService.selectedBrands);
   }
 }

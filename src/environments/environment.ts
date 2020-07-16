@@ -9,7 +9,9 @@ export const environment = {
   clientId: '2gt58uiktcdku5d24fg67m53ln',
   baseURL: 'https://kka6cqubal.execute-api.ap-south-1.amazonaws.com/dev/',
   tokenRefreshTime: 3300,
-  carsPerPage: 2
+  carsPerPage: 2,
+  initialCityName: 'Agra',
+  initialCityCode: 'AGA'
 };
 
 /*

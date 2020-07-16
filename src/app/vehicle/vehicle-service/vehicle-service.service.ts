@@ -10,6 +10,11 @@ import { environment } from '../../../environments/environment';
 })
 export class VehicleService {
 
+  selectedSegments: string[] = [];
+  selectedTransmissions: string[] = [];
+  selectedFuels: string[] = [];
+  selectedBrands: string[] = [];
+
   priceMaster = new Subject<any>();
   tenureMaster = new Subject<any>();
   price: any;
@@ -18,20 +23,23 @@ export class VehicleService {
   vehicleInventory = new Subject<VehicleResponse>();
   initialCitySubject = new Subject<string>();
   filters: VehicleFilterRequest = new VehicleFilterRequest();
+  appliedFilters = new Subject<VehicleFilterRequest>();
   resetAllFilter = new Subject<boolean>();
   carsPerPage: number = environment.carsPerPage;
   pageNumber = new Subject<number>();
   newInventoryLoaded = new Subject<boolean>();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    let currentCity = localStorage.getItem('cityName');
+    this.initialCitySubject.next(currentCity);
+  }
 
   getAllVehicles(startPage: number) {
     return this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle?startPage=' + startPage + '&size=' + this.carsPerPage).subscribe(
       res => {
         console.log(res);
         this.vehicleInventory.next(res);
-        this.initialCitySubject.next('Agra');
       }
     );
   }
@@ -57,6 +65,10 @@ export class VehicleService {
     return this.http.get<CityResponse>('cities/get-cities');
   }
 
+  getActiveCities() {
+    return this.http.get<CityResponse>('cities/get-active-cities');
+  }
+
   filterBySegmentType(suv: boolean, sedan: boolean, hatchback: boolean) {
     if (suv == true || sedan == true || hatchback == true) {
       this.filters.segment = true;
@@ -66,7 +78,8 @@ export class VehicleService {
     } else {
       this.filters.segment = false;
     }
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
   filterByTransmissionType(manual: boolean, auto: boolean) {
@@ -77,7 +90,8 @@ export class VehicleService {
     } else {
       this.filters.transmission = false;
     }
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
   filterByFuelType(petrol: boolean, diesel: boolean) {
@@ -88,14 +102,16 @@ export class VehicleService {
     } else {
       this.filters.fuel = false;
     }
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
   filterByPrice(minPrice: number, maxPrice: number) {
     this.filters.price = true;
     this.filters.minPrice = minPrice;
     this.filters.maxPrice = maxPrice;
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
   filterByBrandName(brand?: string[]) {
@@ -105,7 +121,8 @@ export class VehicleService {
       this.filters.brand = true;
       this.filters.brands = brand;
     }
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
   filterByCity(city: string) {
@@ -115,21 +132,27 @@ export class VehicleService {
       this.filters.city = true;
       this.filters.cityName = city;
     }
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
   clearAllFilters() {
     this.filters = new VehicleFilterRequest();
-    this.filterVehicleListing(0);
+    this.appliedFilters.next(this.filters);
+    this.filterVehicleListing(0, false);
   }
 
-  filterVehicleListing(pageNumber: number) {
+  filterVehicleListing(pageNumber: number, onInit: boolean) {
     this.pageNumber.next(pageNumber);
     if (pageNumber == 0)
       this.newInventoryLoaded.next(true);
+    if (onInit == true) {
+      this.filters.city = true;
+      this.filters.cityName = localStorage.getItem('cityCode');
+      this.appliedFilters.next(this.filters);
+    }
     return this.http.post<VehicleResponse>('filters/all-filters?startPage=' + pageNumber + '&size=' + this.carsPerPage, this.filters).subscribe(
       res => {
-        console.log(res);
         this.vehicleInventory.next(res);
       }
     )

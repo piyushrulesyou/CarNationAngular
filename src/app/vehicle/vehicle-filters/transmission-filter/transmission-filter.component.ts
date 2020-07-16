@@ -8,7 +8,7 @@ import { VehicleService } from '../../vehicle-service/vehicle-service.service';
 })
 export class TransmissionFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) {
+  constructor(public vehicleService: VehicleService) {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
         if (reset == true) {
@@ -27,19 +27,18 @@ export class TransmissionFilterComponent implements OnInit {
       { transmissionCode: 'AUTO', transmissionName: 'Automatic' }
     ]
 
-  selectedTransmissions: string[] = [];
   ngOnInit(): void {
   }
 
   clearSelections() {
-    this.selectedTransmissions = [];
+    this.vehicleService.selectedTransmissions = [];
     this.vehicleService.filterByTransmissionType(true, true);
   }
 
   onSelectTransmission() {
-    const length = this.selectedTransmissions.length;
+    const length = this.vehicleService.selectedTransmissions.length;
     if (length === 1) {
-      if (this.selectedTransmissions.includes("MAN"))
+      if (this.vehicleService.selectedTransmissions.includes("MAN"))
         this.vehicleService.filterByTransmissionType(true, false);
       else
         this.vehicleService.filterByTransmissionType(false, true);

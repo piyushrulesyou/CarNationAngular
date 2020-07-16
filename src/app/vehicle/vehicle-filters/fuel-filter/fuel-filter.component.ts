@@ -8,7 +8,7 @@ import { VehicleService } from '../../vehicle-service/vehicle-service.service';
 })
 export class FuelFilterComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) {
+  constructor(public vehicleService: VehicleService) {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
         if (reset == true) {
@@ -27,19 +27,18 @@ export class FuelFilterComponent implements OnInit {
       { fuelCode: 'DIE', fuelName: 'Diesel' }
     ]
 
-  selectedFuels: string[] = [];
   ngOnInit(): void {
   }
 
   clearSelections() {
-    this.selectedFuels = [];
+    this.vehicleService.selectedFuels = [];
     this.vehicleService.filterByFuelType(true, true);
   }
 
   onSelectFuel() {
-    const length = this.selectedFuels.length;
+    const length = this.vehicleService.selectedFuels.length;
     if (length === 1) {
-      if (this.selectedFuels.includes("PET"))
+      if (this.vehicleService.selectedFuels.includes("PET"))
         this.vehicleService.filterByFuelType(true, false);
       else
         this.vehicleService.filterByFuelType(false, true);

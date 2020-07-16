@@ -225,7 +225,7 @@ export class CognitoUserService {
     var user = this.getCurrentUser();
     if (user)
       user.signOut();
-    localStorage.clear();
+    this.handleLogout();
     if (this.autoRefreshTokenTimer) {
       clearTimeout(this.autoRefreshTokenTimer);
     }
@@ -244,5 +244,12 @@ export class CognitoUserService {
 
   resetPassword() {
 
+  }
+
+  handleLogout() {
+    localStorage.removeItem("CognitoIdentityServiceProvider");
+    localStorage.removeItem(CognitoUserService.ACCESS_TOKEN_KEY);
+    localStorage.removeItem(CognitoUserService.ID_TOKEN_KEY);
+    localStorage.removeItem(CognitoUserService.REFRESH_TOKEN_KEY);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../vehicle-service/vehicle-service.service';
-import { Subject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-city-filter',
@@ -14,8 +14,7 @@ export class CityFilterComponent implements OnInit {
       reset => {
         if (reset == true) {
           this.vehicleService.filterByCity(null);
-          this.vehicleService.initialCitySubject.next('Agra');
-          this.selectedCity = { cityCode: 'AGA', cityName: 'Agra' };
+          this.selectedCity = { cityCode: environment.initialCityCode, cityName: environment.initialCityName };
         }
       }
     )
@@ -24,26 +23,56 @@ export class CityFilterComponent implements OnInit {
     cityCode: string,
     cityName: string
   }[] = [];
-  initialCity: string = 'Agra';
+  activeCities: {
+    cityCode: string,
+    cityName: string,
+  }[] = [];
+  displayCities = [];
+
+
+  initialCity: string = localStorage.getItem('cityName');
+  initialCityCode: string = localStorage.getItem('cityCode');
   selectedCity:
     {
       cityCode: string,
       cityName: string
-    } = { cityCode: 'AGA', cityName: 'Agra' };
-
-
+    } = { cityCode: this.initialCityCode, cityName: this.initialCity };
+  cityError: string;
+  cityErrorCity: string;
 
   ngOnInit(): void {
-    this.vehicleService.initialCitySubject.next('Agra');
     this.vehicleService.getAllCities().subscribe(
       cities => {
         this.cities = cities.data.cities;
+        this.vehicleService.getActiveCities().subscribe(
+          activeCities => {
+            this.activeCities = activeCities.data.activeCities;
+          }
+        )
       })
   }
 
   onSelectCity() {
-    this.vehicleService.initialCitySubject.next(this.selectedCity.cityName);
-    const selectedCity = this.selectedCity.cityCode;
-    this.vehicleService.filterByCity(selectedCity);
+    this.cityError = '';
+    this.cityErrorCity = '';
+    if (!this.isPresent(this.selectedCity.cityCode)) {
+      this.cityError = "Currently no inventory in ";
+      this.cityErrorCity = this.selectedCity.cityName;
+    } else {
+      localStorage.setItem('cityName', this.selectedCity.cityName);
+      localStorage.setItem('cityCode', this.selectedCity.cityCode);
+      this.vehicleService.initialCitySubject.next(this.selectedCity.cityName);
+      const selectedCity = this.selectedCity.cityCode;
+      this.vehicleService.filterByCity(selectedCity);
+    }
+  }
+
+
+  isPresent(cityCode: string): boolean {
+    for (let i = 0; i < this.activeCities.length; i++) {
+      if (this.activeCities[i].cityCode == cityCode)
+        return true;
+    }
+    return false;
   }
 }

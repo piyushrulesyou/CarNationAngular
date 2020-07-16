@@ -1,5 +1,9 @@
 <h6>City</h6>
+<div class="row">
+    <span class="alert alert-danger city_error" *ngIf="cityError">{{cityError}}<b>{{cityErrorCity}}</b></span>
+</div>
 <p-dropdown class="dropdown_selected" [options]="cities" [(ngModel)]="selectedCity" placeholder={{initialCity}}
     optionLabel="cityName" (onChange)="onSelectCity()"
-    [style]="{'border-left':'0px','border-right':'0px','border-top':'0px','font-weight':'700'}">
+    [style]="{'border-left':'0px','border-right':'0px','border-top':'0px','font-weight':'700'}"
+    *ngIf="cities.length!=0">
 </p-dropdown>

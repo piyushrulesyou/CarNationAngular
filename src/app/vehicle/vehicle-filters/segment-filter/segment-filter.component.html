@@ -3,12 +3,13 @@
         <h6>Segment</h6>
     </div>
     <div class="col clear_float">
-        <div class="clear_all" *ngIf="selectedSegments.length!=0" (click)="clearSelections()">ClearAll</div>
+        <div class="clear_all" *ngIf="vehicleService.selectedSegments.length!=0" (click)="clearSelections()">ClearAll
+        </div>
     </div>
 </div>
 
 <div *ngFor="let segment of segments">
-    <p-checkbox value={{segment.segmentCode}} [(ngModel)]="selectedSegments" label={{segment.segmentName}}
-        (click)="onSelectSegment()">
+    <p-checkbox value={{segment.segmentCode}} [(ngModel)]="vehicleService.selectedSegments"
+        label={{segment.segmentName}} (click)="onSelectSegment()">
     </p-checkbox>
 </div>

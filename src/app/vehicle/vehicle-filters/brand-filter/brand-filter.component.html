@@ -3,10 +3,11 @@
         <h6>Brand</h6>
     </div>
     <div class="col clear_float">
-        <div class="clear_all" *ngIf="selectedBrands.length!=0" (click)="clearSelections()">ClearAll</div>
+        <div class="clear_all" *ngIf="vehicleService.selectedBrands.length!=0" (click)="clearSelections()">ClearAll
+        </div>
     </div>
 </div>
 <div *ngFor="let brand of brandList">
-    <p-checkbox value={{brand.producerCode}} [(ngModel)]="selectedBrands" label={{brand.producerName}}
+    <p-checkbox value={{brand.producerCode}} [(ngModel)]="vehicleService.selectedBrands" label={{brand.producerName}}
         (click)=onSelectBrand()></p-checkbox>
 </div>

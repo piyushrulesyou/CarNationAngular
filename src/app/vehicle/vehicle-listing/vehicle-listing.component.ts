@@ -4,6 +4,7 @@ import { VehicleService } from '../vehicle-service/vehicle-service.service';
 import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment'
+import { InitialCity } from '../../utils/InitialCity';
 
 @Component({
   selector: 'app-vehicle-listing',
@@ -24,21 +25,21 @@ export class VehicleListingComponent implements OnInit {
   vehicleList: any[];
   basePriceArray: any[];
   discountedPriceArray: any[]
-  initialCitySelected: string = 'Agra';
   totalPages: number;
   totalEnteries: number;
   pageNumber: number;
   paginationArray: number[] = [];
   newInventory: boolean = true;
+  initialCitySelected: string = localStorage.getItem('cityName');
 
   ngOnInit(): void {
 
-    this.vehicleService.initialCitySubject.subscribe(
-      city => {
-        this.initialCitySelected = city;
-      }
-    )
-
+    if (localStorage.getItem('cityName') == null) {
+      InitialCity.updateInitialCity();
+      this.initialCitySelected = environment.initialCityName;
+      let currentCity = localStorage.getItem('cityName');
+      this.vehicleService.initialCitySubject.next(currentCity);
+    }
     this.isLoading = true;
     this.initialVehicleListing();
     this.vehicleService.pageNumber.subscribe(
@@ -51,12 +52,17 @@ export class VehicleListingComponent implements OnInit {
         this.newInventory = isNewInventory;
       }
     )
+    this.vehicleService.initialCitySubject.subscribe(
+      currentCity => {
+        this.initialCitySelected = currentCity;
+      }
+    )
   }
 
   initialVehicleListing() {
     this.pageNumber = 0;
     this.vehicleService.pageNumber.next(0);
-    this.vehicleService.filterVehicleListing(this.pageNumber);
+    this.vehicleService.filterVehicleListing(this.pageNumber, true);
     this.vehicleService.vehicleInventory.subscribe(
       vehicles => {
         if (vehicles.data == null) {
@@ -71,7 +77,7 @@ export class VehicleListingComponent implements OnInit {
   changePage(pageNumber: number) {
     if (this.pageNumber != pageNumber) {
       this.pageNumber = pageNumber;
-      this.vehicleService.filterVehicleListing(this.pageNumber);
+      this.vehicleService.filterVehicleListing(this.pageNumber, false);
       this.vehicleService.vehicleInventory.subscribe(
         vehicles => {
           if (vehicles.data == null) {

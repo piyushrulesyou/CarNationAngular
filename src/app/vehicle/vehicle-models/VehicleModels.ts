@@ -26,6 +26,10 @@ export interface CityResponse {
     cities: {
       cityCode: string,
       cityName: string
+    }[],
+    activeCities: {
+      cityCode: string,
+      cityName: string
     }[]
   }
 }

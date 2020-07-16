@@ -2,3 +2,9 @@ h6 {
     margin-bottom: 1rem;
     font-weight: 550;
 }
+
+.city_error {
+    font-size: 0.6rem;
+    padding: 5px;
+    margin-left: 1rem;
+}

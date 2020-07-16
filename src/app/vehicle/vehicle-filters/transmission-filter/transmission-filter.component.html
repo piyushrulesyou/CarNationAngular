@@ -3,12 +3,13 @@
         <h6>Transmission</h6>
     </div>
     <div class="col clear_float">
-        <div class="clear_all" *ngIf="selectedTransmissions.length!=0" (click)="clearSelections()">ClearAll</div>
+        <div class="clear_all" *ngIf="vehicleService.selectedTransmissions.length!=0" (click)="clearSelections()">
+            ClearAll</div>
     </div>
 </div>
 
 <div *ngFor="let transmission of transmissions">
-    <p-checkbox value={{transmission.transmissionCode}} [(ngModel)]="selectedTransmissions"
+    <p-checkbox value={{transmission.transmissionCode}} [(ngModel)]="vehicleService.selectedTransmissions"
         label={{transmission.transmissionName}} (click)="onSelectTransmission()">
     </p-checkbox>
 </div>

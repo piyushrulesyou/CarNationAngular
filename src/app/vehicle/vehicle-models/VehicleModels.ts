@@ -54,7 +54,7 @@ export class VehicleFilterRequest {
   public brands: string[]
 
   VehicleFilterRequest() {
-    this.city = false;
+    this.city = true;
     this.cityName = '';
     this.price = false;
     this.minPrice = 0;

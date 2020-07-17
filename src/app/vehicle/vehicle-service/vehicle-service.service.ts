@@ -141,7 +141,7 @@ export class VehicleService {
   clearAllFilters() {
     this.filters = new VehicleFilterRequest();
     this.appliedFilters.next(this.filters);
-    this.filterVehicleListing(0, false);
+    this.filterVehicleListing(0, true);
   }
 
   filterVehicleListing(pageNumber: number, onInit: boolean) {
@@ -149,7 +149,6 @@ export class VehicleService {
     if (pageNumber == 0)
       this.newInventoryLoaded.next(true);
     if (onInit) {
-      this.filters.city = true;
       this.filters.cityName = localStorage.getItem('cityCode');
       this.appliedFilters.next(this.filters);
     }

@@ -13,12 +13,17 @@ export class CityFilterComponent implements OnInit {
     this.vehicleService.resetAllFilter.subscribe(
       reset => {
         if (reset) {
-          this.vehicleService.filterByCity(null);
-          this.selectedCity = { cityCode: environment.initialCityCode, cityName: environment.initialCityName };
+          let cityCode = localStorage.getItem('cityCode')
+          this.vehicleService.filterByCity(cityCode);
+          this.selectedCity = {
+            cityCode: localStorage.getItem('cityCode'),
+            cityName: localStorage.getItem('cityName')
+          };
+          this.initialCity = localStorage.getItem('cityName');
         }
-      }
-    )
+      })
   }
+
   cities: {
     cityCode: string,
     cityName: string
@@ -29,7 +34,6 @@ export class CityFilterComponent implements OnInit {
   }[] = [];
   displayCities = [];
 
-
   initialCity: string = localStorage.getItem('cityName');
   initialCityCode: string = localStorage.getItem('cityCode');
   selectedCity:
@@ -37,6 +41,7 @@ export class CityFilterComponent implements OnInit {
       cityCode: string,
       cityName: string
     } = { cityCode: this.initialCityCode, cityName: this.initialCity };
+
   cityError: string;
   cityErrorCity: string;
 
@@ -66,7 +71,6 @@ export class CityFilterComponent implements OnInit {
       this.vehicleService.filterByCity(selectedCity);
     }
   }
-
 
   isPresent(cityCode: string): boolean {
     for (let i = 0; i < this.activeCities.length; i++) {

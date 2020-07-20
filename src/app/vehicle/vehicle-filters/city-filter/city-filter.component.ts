@@ -20,6 +20,8 @@ export class CityFilterComponent implements OnInit {
             cityName: localStorage.getItem('cityName')
           };
           this.initialCity = localStorage.getItem('cityName');
+          this.cityError = "";
+          this.cityErrorCity = "";
         }
       })
   }

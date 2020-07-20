@@ -1,0 +1,12 @@
+.bottom_bar {
+    color: #fff;
+    font-size: 1rem;
+    background-color: black;
+    overflow: hidden;
+    position: sticky;
+    margin-bottom: 0rem !important;
+}
+
+.logo {
+    padding-left: 2rem;
+}

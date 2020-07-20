@@ -1,0 +1,39 @@
+.home_heading {
+    color: #171c8f;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-left: 25%;
+}
+
+.home_image_main {
+    margin-left: 5.5rem;
+    position: relative;
+    margin-top: 3rem;
+    z-index: 1;
+}
+
+.home_image_main_2 {
+    margin-left: -3rem;
+    position: absolute;
+    height: 19rem;
+    width: 41rem;
+    z-index: 2;
+}
+
+.home_image {
+    width: 78.2rem;
+    margin-left: -3.4rem;
+    height: 22rem;
+    margin-top: 2rem;
+}
+
+.gap {
+    margin-bottom: 5rem;
+}
+
+.home_content {
+    text-align: center;
+    color: #171c8f;
+    font-size: 1.2rem;
+    font-weight: 600;
+}

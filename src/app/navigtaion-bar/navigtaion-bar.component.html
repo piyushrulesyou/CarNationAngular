@@ -1,21 +1,23 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm">
     <!-- <div class="container-fluid"> -->
     <a routerLink="/home" class="navbar-brand"><img class="img-responsive" src="assets/img/CarNationLogo.png"
-            style="width: 115px;"></a>
+            style="width: 15rem;"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto nav_list">
             <li class="nav-item active" *ngIf="cognitoUserService.isLoggedIn()"><a class="nav-link"
                     routerLink="/vehicle">
+                    <img class="car_small" src="assets/img/car_small.webp">
                     Car Subscription
                 </a></li>
-            <li class="nav-item active"><a class="nav-link" routerLink="">
+            <li class="gap"></li>
+            <li class="nav-item active"><a class="nav-link" routerLink="/home">
                     How it works!
                 </a></li>
-            <li class="nav-item active"><a class="nav-link" routerLink="">
+            <li class="nav-item active"><a class="nav-link" routerLink="/home">
                     FAQs
                 </a></li>
             <li class="nav-item active" *ngIf="!cognitoUserService.isLoggedIn()"><a class="nav-link"

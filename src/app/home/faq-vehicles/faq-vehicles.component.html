@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-4 col-lg-4 col-xs-12 col-md-4">
+        <div class="gap"></div>
+        <img src="assets/img/faq/faq_image.png">
+    </div>
+    <div class="col-sm-8 col-lg-8 col-xs-12 col-md-8 faq_section">
+        <div class="faq_title">Frequently Asked Questions (FAQs)</div>
+        <br>
+        <div class="faq_content" (click)="expandFirst()"><i class="pi pi-chevron-circle-right">&nbsp;</i>
+            What is Car Nation Subscribe?
+        </div>
+        <div class="faq_content_extended" *ngIf="showFirst" (click)="expandFirst()">
+            Susbcription by CarNation is a 3, 6, 12, 18, 24 & 36 months subscription program with an all-inclusive
+            monthly payment. This payment includes the usage of the vehicle, maintenance, and other common services
+            related to vehicle
+            ownership. The offering will be fulfilled by a third party leasing company which will also take care of the
+            insurance coverage, Road Side Assistance & disallowance.
+        </div>
+        <br>
+        <div class="faq_content" (click)="expandSecond()"><i class="pi pi-chevron-circle-right">&nbsp;</i>
+            For how long can I subscribe a car?
+        </div>
+        <div class="faq_content_extended" *ngIf="showSecond" (click)="expandSecond()">
+            Our Subscription Tenures are flexible for you to Subscribe for a period of 3, 6, 12, 18, 24 & 36 months.
+        </div>
+        <br>
+        <div class="faq_content" (click)="expandThird()"><i class="pi pi-chevron-circle-right">&nbsp;</i>
+            Can I extend my tenure?
+        </div>
+        <div class="faq_content_extended" *ngIf="showThird" (click)="expandThird()">
+            If you decide to extend the Subscription period while you are using the car, you will need to give prior
+            written request of 30 days to leasing partner for the extension.Upon receipt of the request, leasing partner
+            shall ascertain possibility of extension and communicate to you within 7 days of request. If leasing partner
+            confirms the availability of the Vehicle for aforesaid extension, then you shall be required to pay revised
+            reduced Subscription Fee as advised by leasing partner for the Additional Term.
+        </div>
+        <br>
+        <div class="faq_content" (click)="expandFourth()"><i class="pi pi-chevron-circle-right">&nbsp;</i>
+            How long will it take to get the car?
+        </div>
+        <div class="faq_content_extended" *ngIf="showFourth" (click)="expandFourth()">
+            The subscribed car delivery usually takes 15 days from the time of booking, subject to timely collection of
+            documents and verification and subject to availability. Subscribers are kept informed at all the stages in
+            the case of any changes or unforseen delays.
+        </div>
+    </div>
+</div>

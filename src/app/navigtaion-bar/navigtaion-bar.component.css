@@ -1,3 +1,16 @@
 .dropdown-menu {
     width: 50% !important;
 }
+
+.nav_list {
+    font-size: 1.2rem;
+}
+
+.car_small {
+    width: 4rem;
+    height: 2rem;
+}
+
+.gap {
+    margin-right: 4rem;
+}

@@ -2,7 +2,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { AuthGuardService } from '../core/auth-guard/auth-guard.service';
-import { SampleComponent } from './sample/sample.component';
 import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
 import { VehicleComponent } from './vehicle.component';
 import { AddInventoryComponent } from './add-inventory/add-inventory.component';
@@ -14,7 +13,6 @@ const routes: Routes = [
         children: [
             { path: '', component: VehicleListingComponent },
             { path: 'vehicle-details/:vehicleId', component: VehicleDetailsComponent },
-            { path: 'sample', component: SampleComponent },
             { path: 'add-inventory', component: AddInventoryComponent }
         ]
     }

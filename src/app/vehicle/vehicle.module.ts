@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SampleComponent } from './sample/sample.component';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { SharedModule } from '../shared/shared-module';
 import { VehicleRoutingModule } from './vehicle-routing.module';
@@ -22,7 +21,6 @@ import { LeftImagesComponent } from './add-inventory/left-images/left-images.com
 
 @NgModule({
     declarations: [
-        SampleComponent,
         VehicleListingComponent,
         VehicleDetailsComponent,
         VehicleComponent,

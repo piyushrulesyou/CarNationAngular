@@ -6,7 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
-import { ButtonModule } from 'primeng/button'
+import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { ButtonModule } from 'primeng/button'
         FormsModule,
         CheckboxModule,
         DropdownModule,
-        ButtonModule
+        ButtonModule,
+        FileUploadModule,
+        RadioButtonModule
     ],
     providers: [],
     exports: [
@@ -29,7 +33,9 @@ import { ButtonModule } from 'primeng/button'
         FormsModule,
         CheckboxModule,
         DropdownModule,
-        ButtonModule
+        ButtonModule,
+        FileUploadModule,
+        RadioButtonModule
     ]
 })
 

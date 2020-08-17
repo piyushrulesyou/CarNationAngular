@@ -5,6 +5,7 @@ import { AuthGuardService } from '../core/auth-guard/auth-guard.service';
 import { SampleComponent } from './sample/sample.component';
 import { VehicleListingComponent } from './vehicle-listing/vehicle-listing.component';
 import { VehicleComponent } from './vehicle.component';
+import { AddInventoryComponent } from './add-inventory/add-inventory.component';
 
 const routes: Routes = [
     {
@@ -13,7 +14,8 @@ const routes: Routes = [
         children: [
             { path: '', component: VehicleListingComponent },
             { path: 'vehicle-details/:vehicleId', component: VehicleDetailsComponent },
-            { path: 'sample', component: SampleComponent }
+            { path: 'sample', component: SampleComponent },
+            { path: 'add-inventory', component: AddInventoryComponent }
         ]
     }
 ]

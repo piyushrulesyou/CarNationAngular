@@ -1,0 +1,66 @@
+.upper_border {
+    padding-bottom: 3rem;
+}
+
+.color_images {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+}
+
+.cross {
+    height: 10px;
+    width: 15px;
+    cursor: pointer;
+    margin-left: 3rem;
+}
+
+.add_inventory_label {
+    align-self: center;
+    background-color: #1fbab5;
+    font-weight: 700;
+    padding: 5px;
+    color: white;
+    margin-right: 3rem;
+    border-radius: 0.3rem;
+}
+
+.radio_button_span {
+    margin-right: 2rem;
+}
+
+.tenure_input_span {
+    margin-right: 0.8rem;
+}
+
+.tenure_label {
+    background-color: #1fbab5;
+    font-weight: 500;
+    color: white;
+    padding: 3px;
+    border-radius: 0.3rem;
+}
+
+.tenure_label_input {
+    width: 5rem;
+}
+
+.add_button {
+    border-radius: 0.1rem;
+    color: #1caba2;
+    font-weight: 700;
+    border: 2px solid #ebebeb;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    margin-left: 10rem;
+    margin-bottom: 5rem;
+    width: 30rem;
+    font-size: 1.5rem;
+}
+
+.selected_color_city {
+    margin-bottom: 1rem;
+    margin-left: 10rem;
+}

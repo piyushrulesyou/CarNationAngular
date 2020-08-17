@@ -1,0 +1,258 @@
+<div class="upper_border"></div>
+<div class="row">
+    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+        <app-left-images></app-left-images>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12 col-lg-8">
+        <form (ngSubmit)=onSubmitAddInventory() #addForm=ngForm>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">Model:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="text" id="model" class="form-control" [(ngModel)]="addInventoryForm.model" name="model"
+                        placeholder="VehicleModel" required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">Variant:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="text" id="variant" class="form-control" [(ngModel)]="addInventoryForm.variant"
+                        name="variant" placeholder="VehicleVariant" required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">FuelType:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-radioButton name="Petrol" value="PET" label="Petrol" [(ngModel)]="fuelType" required>
+                    </p-radioButton>
+                    <span class="radio_button_span"></span>
+                    <p-radioButton name="Diesel" value="DIE" label="Diesel" [(ngModel)]="fuelType" required>
+                    </p-radioButton>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">TransmissionType:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-radioButton name="Automatic" value="AUTO" label="Automatic" [(ngModel)]="transmissionType"
+                        required>
+                    </p-radioButton>
+                    <span class="radio_button_span"></span>
+                    <p-radioButton name="Manual" value="MAN" label="Manual" [(ngModel)]="transmissionType" required>
+                    </p-radioButton>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">SmallSizeImage:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <div style="margin-bottom: 1rem;">
+                        <p-fileUpload customUpload="true" (onSelect)="smallImageUpload($event)" accept="image/*"
+                            maxFileSize="1000000" [showUploadButton]="false" [showCancelButton]="false" required>
+                        </p-fileUpload>
+                    </div>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">FullSizeImage:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <div style="margin-bottom: 1rem;">
+                        <p-fileUpload customUpload="true" (onSelect)="fullImageUpload($event)" accept="image/*"
+                            maxFileSize="1000000" [showUploadButton]="false" [showCancelButton]="false" required>
+                        </p-fileUpload>
+                    </div>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">VehicleColor:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-dropdown name="color" [options]="availableColors" [(ngModel)]="selectedColor"
+                        placeholder="Select a Color" optionLabel="colorName" [showClear]="false"
+                        (onChange)="onSelectColor()" required>
+                    </p-dropdown>
+                </div>
+            </div><br>
+            <div class="row selected_color_city" *ngFor="let selectedColor of selectedColors; let i = index">
+                <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+                    <img class="color_images" src="{{selectedColor.colorImage}}">
+                    <span> {{selectedColor.colorName}}</span>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-8 col-lg-8">
+                    <span (click)="removeSelectedColor(selectedColor, i)"><img class="cross"
+                            src="/assets/img/tick_cross/cross.html"></span>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">CarType:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-radioButton name="SUV" value="SUV" label="SUV" [(ngModel)]="segmentType" required>
+                    </p-radioButton>
+                    <span class="radio_button_span"></span>
+                    <p-radioButton name="Sedan" value="Sedan" label="Sedan" [(ngModel)]="segmentType" required>
+                    </p-radioButton>
+                    <span class="radio_button_span"></span>
+                    <p-radioButton name="HatchBack" value="HatchBack" label="HatchBack" [(ngModel)]="segmentType"
+                        required>
+                    </p-radioButton>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">NumberOfSeats:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="number" id="seats" class="form-control" [(ngModel)]="addInventoryForm.seats"
+                        name="seats" placeholder="NumberOfSeats" required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">Producer:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-dropdown [options]="availableProducers" [(ngModel)]="selectedProducer"
+                        placeholder="Select Vehicle Company" name="producerName" optionLabel="producerName"
+                        [showClear]="true" (onChange)="onSelectProducer()" required>
+                    </p-dropdown>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">SortOrder:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="number" value="5" id="sortOrder" class="form-control"
+                        [(ngModel)]="addInventoryForm.sortOrder" name="sortOrder" placeholder="SortOrder" required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">IsPopular:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-radioButton name="Yes" value="true" label="Yes" [(ngModel)]="popular" required></p-radioButton>
+                    <span class="radio_button_span"></span>
+                    <p-radioButton name="No" value="false" label="No" [(ngModel)]="popular" required></p-radioButton>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">ExtraKmCharge:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="number" id="extraKmCharge" class="form-control"
+                        [(ngModel)]="addInventoryForm.extraKmCharge" name="extraKmCharge" placeholder="ExtraKmCharge"
+                        required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">VehiclePrice:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-dropdown [options]="availablePriceList" [(ngModel)]="selectedPrice"
+                        placeholder="Select Vehicle Price" name="vehiclePrice" optionLabel="basePrice"
+                        [showClear]="true" (onChange)="onSelectPrice()" required>
+                    </p-dropdown>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">InsuranceCost:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="number" id="insuranceCost" class="form-control"
+                        [(ngModel)]="addInventoryForm.insuranceCost" name="insuranceCost" placeholder="InsuranceCost"
+                        required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">VehicleCities:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <p-dropdown name="city" [options]="availableCities" [(ngModel)]="selectedCity"
+                        placeholder="Select a City" optionLabel="cityName" [showClear]="false"
+                        (onChange)="onSelectCity()" required>
+                    </p-dropdown>
+                </div>
+            </div><br>
+            <div class="row selected_color_city" *ngFor="let selectedCity of selectedCities; let i = index">
+                <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+                    <span> {{selectedCity.cityName}}</span>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-8 col-lg-8">
+                    <span (click)="removeSelectedCity(selectedCity, i)"><img class="cross"
+                            src="/assets/img/tick_cross/cross.html"></span>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">SecurityDeposit:</span>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
+                    <input type="number" id="securityDeposit" class="form-control"
+                        [(ngModel)]="addInventoryForm.securityDeposit" name="securityDeposit"
+                        placeholder="SecurityDeposit" required>
+                </div>
+            </div><br>
+            <div class="row ui-inputgroup">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                    <span class="add_inventory_label">VehicleTenure:</span>
+                </div>
+                <br>
+                <div>
+                    <label class="tenure_label" id="months3">3 Months</label><br>
+                    <input type="number" id="months3" class="tenure_label_input" [(ngModel)]="tenureArray.months3"
+                        name="months3" placeholder="3 Months Multiplier" required>
+                </div>
+                <span class="tenure_input_span"></span>
+                <div>
+                    <label class="tenure_label" id="months6">6 Months</label><br>
+                    <input type="number" id="months6" class="tenure_label_input" [(ngModel)]="tenureArray.months6"
+                        name="months6" placeholder="6 Months Multiplier" required>
+                </div>
+                <span class="tenure_input_span"></span>
+                <div>
+                    <label class="tenure_label" id="months12">12 Months</label><br>
+                    <input type="number" id="months12" class="tenure_label_input" [(ngModel)]="tenureArray.months12"
+                        name="months12" placeholder="12 Months Multiplier" required>
+                </div>
+                <span class="tenure_input_span"></span>
+                <div>
+                    <label class="tenure_label" id="months18">18 Months</label><br>
+                    <input type="number" id="months18" class="tenure_label_input" [(ngModel)]="tenureArray.months18"
+                        name="months18" placeholder="18 Months Multiplier" required>
+                </div>
+                <span class="tenure_input_span"></span>
+                <div>
+                    <label class="tenure_label" id="months24">24 Months</label><br>
+                    <input type="number" id="months24" class="tenure_label_input" [(ngModel)]="tenureArray.months24"
+                        name="months24" placeholder="24 Months Multiplier" required>
+                </div>
+                <span class="tenure_input_span"></span>
+                <div>
+                    <label class="tenure_label" id="months36">36 Months</label><br>
+                    <input type="number" id="months36" class="tenure_label_input" [(ngModel)]="tenureArray.months36"
+                        name="months36" placeholder="36 Months Multiplier" required>
+                </div>
+            </div>
+            <br>
+            <br>
+            <button [disabled]="addForm.invalid" class="add_button" type="submit">AddNewInventory</button>
+        </form>
+    </div>
+</div>

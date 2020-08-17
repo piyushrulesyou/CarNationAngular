@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { VehicleResponse, VehicleBrandResponse, CityResponse, VehicleFilterRequest } from '../vehicle-models/VehicleModels';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { VehicleResponse, VehicleBrandResponse, CityResponse, VehicleFilterRequest, AddInventoryModel, ColorResponse, PriceListResponse } from '../vehicle-models/VehicleModels';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { CognitoUserService } from '../../core/cognito-service/cognito-user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +33,23 @@ export class VehicleService {
   newInventoryLoaded = new Subject<boolean>();
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cognitoUserService: CognitoUserService) {
     let currentCity = localStorage.getItem('cityName');
     this.initialCitySubject.next(currentCity);
+  }
+
+  addNewInventory(smallSizeImage: any, fullSizeImage: any, addInventoryData: AddInventoryModel) {
+    let formData = new FormData();
+    formData.append('smallSizeImage', smallSizeImage, smallSizeImage.name);
+    formData.append('fullSizeImage', fullSizeImage, fullSizeImage.name);
+    formData.append('vehicleInventory', JSON.stringify(addInventoryData))
+    let header = new HttpHeaders();
+    header.append('Content-Type', undefined)
+    return this.http.post<AddInventoryModel>('vehicle-inventory/add-inventory', formData).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
   }
 
   getAllVehicles(startPage: number) {
@@ -69,6 +84,14 @@ export class VehicleService {
 
   getActiveCities() {
     return this.http.get<CityResponse>('cities/get-active-cities');
+  }
+
+  getAllColors() {
+    return this.http.get<ColorResponse>('colors/get-colors');
+  }
+
+  getPriceList() {
+    return this.http.get<PriceListResponse>('price/get-price-list');
   }
 
   filterBySegmentType(suv: boolean, sedan: boolean, hatchback: boolean) {

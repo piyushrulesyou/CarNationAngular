@@ -19,6 +19,16 @@ export interface VehicleBrandResponse {
   }
 }
 
+export interface PriceListResponse {
+  error: boolean;
+  errors: any[];
+  data: {
+    basePrice: number,
+    discountAbsolute: number,
+    discountPercentage: number,
+  }[]
+
+}
 export interface CityResponse {
   error: boolean;
   errors: any[];
@@ -32,6 +42,12 @@ export interface CityResponse {
       cityName: string
     }[]
   }
+}
+
+export interface ColorResponse {
+  error: boolean;
+  errors: any[];
+  data: any[];
 }
 
 export class VehicleFilterRequest {
@@ -72,4 +88,31 @@ export class VehicleFilterRequest {
     this.brand = false;
     this.brands = [];
   }
+}
+
+export class AddInventoryModel {
+  id: string;
+  variant: string;
+  model: string;
+  fuelType: string;
+  transmissionType: string;
+  colorMaster: string[];
+  carType: string;
+  seats: string;
+  producer: string;
+  sortOrder: number;
+  fullSizeImageURL: string;
+  smallSizeImageURL: string;
+  popular: boolean;
+  extraKmCharge: number;
+  priceMaster: number;
+  insuranceCost: number;
+  cityMaster: string[];
+  securityDeposit: number;
+  showVariant: boolean;
+  tenureMaster: number[];
+  createdBy: string;
+  createdDate: Date;
+  modifiedBy: string;
+  modifiedDate: Date;
 }

@@ -8,12 +8,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto nav_list">
-            <li class="nav-item active" *ngIf="cognitoUserService.isLoggedIn()"><a class="nav-link"
+            <li class="nav-item active main_nav" *ngIf="cognitoUserService.isLoggedIn()"><a class="nav-link"
                     routerLink="/vehicle">
                     <img class="car_small" src="assets/img/car_small.webp">
                     Car Subscription
                 </a></li>
             <li class="gap"></li>
+            <li class="nav-item active" *ngIf="cognitoUserService.isLoggedIn()"><a class="nav-link"
+                    routerLink="/vehicle/add-inventory">
+                    Add New Inventory
+                </a></li>
             <li class="nav-item active"><a class="nav-link" routerLink="/home">
                     How it works!
                 </a></li>

@@ -1,27 +1,14 @@
-# VehicleRentingServiceAngular
+# CarNationAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+This is a website which can be used for renting a car for a fixed tenure of period. During that period the person can keep the car as his own and feel like the actual owner of that car. 
 
-## Development server
+## This entire project is made using Spring Boot and Angular.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This repository contains the code for the Front-end(Angular).
 
-## Code scaffolding
+`For the backend code, open the following repository:`
+https://github.com/piyushrulesyou/CarNationJava
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+`The link for the working website is:`
+http://d9h6slvsg5zb.cloudfront.net/

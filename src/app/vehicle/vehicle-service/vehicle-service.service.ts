@@ -55,7 +55,6 @@ export class VehicleService {
   getAllVehicles(startPage: number) {
     return this.http.get<VehicleResponse>('vehicle-inventory/get-vehicle?startPage=' + startPage + '&size=' + this.carsPerPage).subscribe(
       res => {
-        console.log(res);
         this.vehicleInventory.next(res);
       }
     );

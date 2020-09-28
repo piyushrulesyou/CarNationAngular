@@ -84,8 +84,8 @@
                     required>
             </div>
         </div>
-        <button pButton type="button" class="ui-button-rounded ui-button-secondary" (click)="resendOTP()">
-            Resend OTP</button>
+        <button pButton type="button" class="ui-button-rounded ui-button-secondary" (click)="resendOTP()" label="
+        Resend OTP"></button>
         <button class="btn btn-success button-lg float-right" type="submit" [disabled]="otpForm.invalid">
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoadingOTP"></span>
             <span *ngIf="isLoadingOTP">&nbsp;&nbsp;</span>Validate OTP</button>

@@ -4,12 +4,10 @@
 
 export const environment = {
   production: false,
-  region: 'ap-south-1',
-  userPoolId: 'ap-south-1_OeY8LHGsz',
-  clientId: '2gt58uiktcdku5d24fg67m53ln',
-  baseURL: 'https://kka6cqubal.execute-api.ap-south-1.amazonaws.com/dev/',
-  // baseURL: 'http://localhost:8090/',
-  // baseURL: 'http://carnation.ap-south-1.elasticbeanstalk.com/',
+  region: '',
+  userPoolId: '',
+  clientId: '',
+  baseURL: '',
   tokenRefreshTime: 3300,
   carsPerPage: 2,
   initialCityName: 'Agra',

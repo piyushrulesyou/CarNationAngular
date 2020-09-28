@@ -13,4 +13,4 @@ https://github.com/piyushrulesyou/CarNationJava
 
 `The link for the working website is:`
 <br>
-http://d9h6slvsg5zb.cloudfront.net/
+http://dnbnjfd31im3m.cloudfront.net/
